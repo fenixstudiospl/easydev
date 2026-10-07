@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Strona Nie Znaleziona | EasyDev Tools</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=JetBrains+Mono:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6.4.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS with CDN and Custom Configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neonPink: '#ff2a8d',
+                        neonCyan: '#00f3ff',
+                        darkBg: '#05050d',
+                        cardBg: 'rgba(13, 13, 31, 0.85)',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            background-color: #05050d;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Static/Animated Grid Background */
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Gradient Accent Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #ff2a8d 0%, #00f3ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(13, 13, 31, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Neon Buttons */
+        .btn-neon-cyan {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid #00f3ff;
+            color: #00f3ff;
+            transition: all 0.25s ease;
+        }
+
+        .btn-neon-cyan:hover {
+            background: #00f3ff;
+            color: #05050d;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+
+        /* Animation Level States */
+        body.anim-low #particlesCanvas {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between grid-bg relative selection:bg-neonPink selection:text-white">
+
+    <canvas id="particlesCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <nav class="glass-card rounded-2xl px-5 py-4 flex items-center justify-between shadow-2xl">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neonPink to-neonCyan flex items-center justify-center font-mono font-bold text-darkBg text-xl shadow-lg">
+                    ED
+                </div>
+                <div>
+                    <span class="font-mono font-bold text-lg tracking-wider text-white">EasyDev <span class="text-neonCyan">Tools</span></span>
+                    <span class="hidden sm:inline-block text-xs font-mono px-2 py-0.5 rounded bg-white/5 text-gray-400 border border-white/10 ml-2">By: PremiumCode</span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <span class="hidden md:inline-block text-xs font-mono px-2.5 py-1 rounded-full bg-neonCyan/10 text-neonCyan border border-neonCyan/30">
+                    <i class="fa-solid fa-code-branch mr-1"></i>v1.0.2a
+                </span>
+                <button onclick="window.location.href='/'" class="btn-neon-cyan px-4 py-2 rounded-xl text-sm font-mono font-semibold flex items-center space-x-2">
+                    <i class="fa-solid fa-house text-xs"></i>
+                    <span class="hidden sm:inline">Strona Główna</span>
+                </button>
+                <button id="openSettingsBtn" class="p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all" title="Ustawienia Animacji">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT - CLEAN 404 SECTION -->
+    <main class="relative z-10 flex-grow flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 text-center shadow-2xl border border-white/10 relative overflow-hidden">
+                
+                <!-- Background Soft Accent Glows -->
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-neonPink/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-neonCyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Big 404 Text Display -->
+                <div class="mb-4">
+                    <h1 class="font-mono font-extrabold text-8xl sm:text-9xl tracking-tight gradient-text drop-shadow-lg">
+                        404
+                    </h1>
+                </div>
+
+                <!-- Title & Subtitle -->
+                <h2 class="text-xl sm:text-2xl font-bold text-white mb-3">
+                    Strona Nie Została Znaleziona
+                </h2>
+                
+                <p class="text-gray-400 text-sm sm:text-base mb-8 max-w-md mx-auto leading-relaxed">
+                    Przepraszamy, podany adres URL nie istnieje lub został przeniesiony w inne miejsce.
+                </p>
+
+                <!-- Action Button -->
+                <div class="flex items-center justify-center">
+                    <button onclick="window.location.href='/'" class="w-full sm:w-auto btn-neon-cyan px-8 py-3.5 rounded-xl font-mono text-sm font-bold flex items-center justify-center space-x-2 shadow-lg">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Powrót do Strony Główniej</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 pt-4">
+        <div class="glass-card rounded-2xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 font-mono gap-3">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-halved text-neonCyan"></i>
+                <span>&copy; 2026 EasyDev Tools. Wszelkie prawa zastrzeżone.</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>By: <span class="text-neonPink font-semibold">PremiumCode</span></span>
+                <span class="text-gray-600">|</span>
+                <a href="#" onclick="showToast('Status serwerów: Działają prawidłowo', 'info'); return false;" class="hover:text-neonCyan transition-colors">System Status</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 w-full max-w-md mx-4 border border-white/10 shadow-2xl transform scale-95 transition-all duration-300 modal-content">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <h3 class="text-lg font-mono font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-neonCyan"></i> Ustawienia Wydajności
+                </h3>
+                <button id="closeSettingsBtn" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-white/5 transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block font-mono text-sm text-gray-300 mb-3">Poziom Efektów Tła:</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button id="animLowBtn" class="p-3 rounded-xl font-mono text-xs border border-white/10 bg-white/5 text-gray-300 hover:border-neonPink transition-all flex flex-col items-center gap-2">
+                            <i class="fa-solid fa-gauge text-lg"></i>
+                            <span>Wyłącz Tło</span>
+                        </button>
+                        <button id="animHighBtn" class="p-3 rounded-xl font-mono text-xs border border-neonCyan bg-neonCyan/10 text-neonCyan transition-all flex flex-col items-center gap-2">
+                            <i class="fa-solid fa-bolt text-lg"></i>
+                            <span>Włącz Cząsteczki</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-xs text-gray-400 font-mono leading-relaxed">
+                    <i class="fa-solid fa-info-circle text-neonCyan mr-1"></i> Wyłączenie cząsteczek tła ogranicza zużycie baterii i zasobów CPU.
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-white/10 flex justify-end">
+                <button id="saveSettingsBtn" class="btn-neon-cyan px-6 py-2.5 rounded-xl font-mono text-xs font-bold">
+                    Zapisz Ustawienia
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT CORE LOGIC -->
+    <script>
+        // --- State Management ---
+        let currentAnimLevel = localStorage.getItem('easydev_anim_level') || 'HIGH';
+
+        // --- DOM Elements ---
+        const settingsModal = document.getElementById('settingsModal');
+        const openSettingsBtn = document.getElementById('openSettingsBtn');
+        const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+        const animLowBtn = document.getElementById('animLowBtn');
+        const animHighBtn = document.getElementById('animHighBtn');
+        const canvas = document.getElementById('particlesCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // --- Particle System Engine ---
+        let particles = [];
+        let animationFrameId = null;
+        let mouse = { x: null, y: null, radius: 120 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.speedY = (Math.random() - 0.5) * 0.6;
+                this.color = Math.random() > 0.5 ? '#00f3ff' : '#ff2a8d';
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        let directionX = dx / distance;
+                        let directionY = dy / distance;
+                        this.x -= directionX * force * 2;
+                        this.y -= directionY * force * 2;
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(Math.floor(window.innerWidth / 18), 60);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        let opacity = 1 - (distance / 110);
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${opacity * 0.12})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            if (currentAnimLevel === 'LOW') {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            connectParticles();
+            animationFrameId = requestAnimationFrame(animateParticles);
+        }
+
+        // --- Settings Management ---
+        function applyAnimationLevel(level) {
+            currentAnimLevel = level;
+            localStorage.setItem('easydev_anim_level', level);
+            
+            if (level === 'LOW') {
+                document.body.classList.add('anim-low');
+                animLowBtn.className = "p-3 rounded-xl font-mono text-xs border border-neonPink bg-neonPink/10 text-neonPink transition-all flex flex-col items-center gap-2";
+                animHighBtn.className = "p-3 rounded-xl font-mono text-xs border border-white/10 bg-white/5 text-gray-300 hover:border-neonCyan transition-all flex flex-col items-center gap-2";
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            } else {
+                document.body.classList.remove('anim-low');
+                animHighBtn.className = "p-3 rounded-xl font-mono text-xs border border-neonCyan bg-neonCyan/10 text-neonCyan transition-all flex flex-col items-center gap-2";
+                animLowBtn.className = "p-3 rounded-xl font-mono text-xs border border-white/10 bg-white/5 text-gray-300 hover:border-neonPink transition-all flex flex-col items-center gap-2";
+                initParticles();
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                animateParticles();
+            }
+        }
+
+        // --- Modal Interactions ---
+        function openModal() {
+            settingsModal.classList.remove('opacity-0', 'pointer-events-none');
+            settingsModal.querySelector('.modal-content').classList.remove('scale-95');
+            settingsModal.querySelector('.modal-content').classList.add('scale-100');
+        }
+
+        function closeModal() {
+            settingsModal.classList.add('opacity-0', 'pointer-events-none');
+            settingsModal.querySelector('.modal-content').classList.remove('scale-100');
+            settingsModal.querySelector('.modal-content').classList.add('scale-95');
+        }
+
+        openSettingsBtn.addEventListener('click', openModal);
+        closeSettingsBtn.addEventListener('click', closeModal);
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) closeModal();
+        });
+
+        animLowBtn.addEventListener('click', () => applyAnimationLevel('LOW'));
+        animHighBtn.addEventListener('click', () => applyAnimationLevel('HIGH'));
+
+        saveSettingsBtn.addEventListener('click', () => {
+            closeModal();
+            showToast('Ustawienia zostały pomyślnie zapisane!', 'success');
+        });
+
+        // --- Toast Notifications System ---
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const isSuccess = type === 'success';
+            const borderColor = isSuccess ? 'border-neonCyan' : 'border-neonPink';
+            const icon = isSuccess ? 'fa-check-circle text-neonCyan' : 'fa-circle-info text-neonPink';
+
+            toast.className = `glass-card pointer-events-auto px-4 py-3 rounded-xl border ${borderColor} text-white font-mono text-xs flex items-center space-x-3 shadow-2xl transition-all duration-300 transform translate-x-10 opacity-0`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-base"></i>
+                <span>${message}</span>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-10', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-x-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // --- Initialization ---
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            if (currentAnimLevel === 'HIGH') initParticles();
+        });
+
+        window.onload = () => {
+            resizeCanvas();
+            applyAnimationLevel(currentAnimLevel);
+        };
+    </script>
+</body>
+</html>
