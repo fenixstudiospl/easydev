@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="pl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyDev Tools | By: PremiumCode</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&family=VT323&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neonPink: '#ff2a8d',
+                        neonCyan: '#00f3ff',
+                        darkBg: '#05050d',
+                        cardBg: 'rgba(13, 13, 31, 0.85)',
+                        mcDark: '#111111',
+                        mcBorder: '#3c3c3c'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
+                        mc: ['VT323', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --neon-pink: #ff2a8d;
+            --neon-cyan: #00f3ff;
+        }
+
+        body {
+            background-color: #05050d;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Animated Perspective Cyber Grid */
+        .grid-bg {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 42, 141, 0.05) 1px, transparent 1px);
+        }
+
+        body.anim-high .grid-bg {
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Shimmer & Neon Text Glows */
+        .shimmer-text {
+            background: linear-gradient(90deg, #ff2a8d, #00f3ff, #ffffff, #ff2a8d);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.anim-high .shimmer-text {
+            animation: shimmer 6s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .neon-glow-pink {
+            filter: drop-shadow(0 0 12px rgba(255, 42, 141, 0.6));
+        }
+
+        .neon-glow-cyan {
+            filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.6));
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(13, 13, 28, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
+        }
+
+        body.anim-high .glass-card {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-hover:hover {
+            border-color: rgba(0, 243, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.25), inset 0 0 15px rgba(0, 243, 255, 0.1);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        /* Animated Pulsing Neon Borders */
+        .animated-border {
+            position: relative;
+        }
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(90deg, #ff2a8d, #00f3ff, #ff2a8d);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            background-size: 200% 100%;
+        }
+
+        body.anim-high .animated-border::before {
+            animation: borderRotate 4s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* Skin Float & Glow Animations */
+        @keyframes floatSkin {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1.5deg); }
+        }
+
+        body.anim-high .animate-float-skin {
+            animation: floatSkin 4.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.4)); }
+            50% { filter: drop-shadow(0 0 30px rgba(255, 42, 141, 0.7)); }
+        }
+
+        body.anim-high .skin-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        /* Custom Minecraft Server Item Slot Styling */
+        .mc-slot {
+            background-color: #0d0d0d;
+            border: 3px solid #282828;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9), 0 8px 25px rgba(0,0,0,0.8);
+            image-rendering: pixelated;
+        }
+
+        .mc-font {
+            font-family: 'VT323', 'Courier New', monospace;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+
+        /* Exact Monospace Pre Block Preservation */
+        pre.exact-ascii {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace !important;
+            white-space: pre !important;
+            word-break: normal !important;
+            overflow-x: auto;
+            line-height: 1.15 !important;
+            letter-spacing: 0px !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(5, 5, 13, 0.9);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f1f3a;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+
+        /* Buttons */
+        .btn-neon-pink {
+            background: linear-gradient(135deg, #ff2a8d, #b80058);
+            box-shadow: 0 0 20px rgba(255, 42, 141, 0.4);
+            transition: all 0.25s ease;
+        }
+        .btn-neon-pink:hover {
+            box-shadow: 0 0 30px rgba(255, 42, 141, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-neon-cyan {
+            background: linear-gradient(135deg, #00f3ff, #008899);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            color: #05050d;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+        .btn-neon-cyan:hover {
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Low Animation Overrides */
+        body.anim-low * {
+            animation: none !important;
+            transition: none !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between grid-bg anim-high" id="app-body">
+
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+
+    <!-- HEADER NAVIGATION -->
+    <header class="relative z-10 border-b border-gray-800/80 glass-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-row items-center justify-between gap-4">
+            
+            <!-- Logo Brand -->
+            <div class="flex items-center gap-3.5 cursor-pointer group" onclick="switchTab('menu')">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-neonPink to-neonCyan flex items-center justify-center p-[2px] shadow-lg shadow-neonPink/20 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-darkBg rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-code text-neonCyan text-xl group-hover:rotate-12 transition-transform"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl font-black tracking-wider text-white">EasyDev <span class="text-neonPink neon-glow-pink">Tools</span></span>
+                    </div>
+                    <span class="block text-[11px] font-mono font-bold tracking-widest text-neonCyan uppercase -mt-0.5">By: PremiumCode</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links & Actions -->
+            <nav class="flex items-center gap-2 sm:gap-3">
+                <button onclick="switchTab('menu')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white transition flex items-center gap-2 border border-gray-800 bg-gray-900/60 hover:border-neonCyan/40 hover:bg-neonCyan/10 shadow-md">
+                    <i class="fa-solid fa-border-all text-neonCyan"></i> <span class="hidden sm:inline"></span>Strona Główna
+                </button>
+                
+                <button onclick="openSettingsModal()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white transition flex items-center gap-2 border border-gray-800 bg-gray-900/60 hover:border-neonPink/40 hover:bg-neonPink/10">
+                    <i class="fa-solid fa-gear text-neonPink"></i> Ustawienia
+                </button>
+
+                <div class="h-5 w-[1px] bg-gray-800 hidden sm:block"></div>
+                
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-neonCyan/10 text-neonCyan border border-neonCyan/30 shadow-lg shadow-neonCyan/10">
+                    <span class="w-2 h-2 rounded-full bg-neonCyan animate-ping"></span> v1.0.2a
+                </span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- ==================== VIEW 1: TOOL SELECTION MENU ==================== -->
+        <section id="view-menu" class="space-y-10 animate-fade-in transition-all duration-300">
+            
+            <!-- Hero Banner with Minecraft Skin Image -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-gray-800/80 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Left Hero Text -->
+                    <div class="lg:col-span-8 space-y-5 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neonPink/10 border border-neonPink/30 text-neonPink text-xs font-mono font-bold uppercase tracking-widest shadow-lg shadow-neonPink/10">
+                            <i class="fa-solid fa-sparkles"></i>beta testy
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+                            Twórz, Projektuj i Konfiguruj z <br><span class="shimmer-text">EasyDev Tools</span>
+                        </h1>
+                        <p class="text-gray-300 text-sm sm:text-base max-w-2xl leading-relaxed font-medium">
+                            Zestaw zaawansowanych edytorów dla deweloperów serwerów Minecraft, twórców stron internetowych oraz botów Discord.
+                        </p>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 text-xs font-mono text-neonCyan">
+                             <span class="font-bold border-b border-neonCyan/40">By: PremiumCode</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Minecraft Skin Graphic -->
+                    <div class="lg:col-span-4 flex flex-col items-center justify-center relative">
+                        <div class="relative group">
+                            <!-- Background Neon Glow aura -->
+                            <div class="absolute -inset-2 bg-gradient-to-r from-neonPink to-neonCyan rounded-full blur-2xl opacity-40 group-hover:opacity-75 transition duration-500"></div>
+                            
+                            <!-- Skin Image -->
+                            <img src="https://i.imgur.com/O8OHzfb.png" alt="Minecraft Skin" class="relative w-44 sm:w-56 lg:w-64 h-auto object-contain animate-float-skin skin-glow drop-shadow-2xl transition-transform duration-300">
+                            
+                            <!-- Pointer badge badge pointing to tools below -->
+                            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3.5 py-1.5 rounded-full bg-darkBg/90 border border-neonCyan/60 text-[11px] font-mono font-bold text-neonCyan shadow-xl flex items-center gap-2 whitespace-nowrap">
+                                <i class="fa-solid fa-hand-pointer text-neonPink animate-bounce"></i> by: kubagood
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Target Audience Badge Bar -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-5xl mx-auto">
+                <div class="glass-card rounded-xl p-3 flex items-center justify-center gap-2.5 text-xs font-mono text-gray-300 hover:border-neonPink/40 transition">
+                    <i class="fa-solid fa-cube text-neonPink text-base"></i> Minecraft Devs
+                </div>
+                <div class="glass-card rounded-xl p-3 flex items-center justify-center gap-2.5 text-xs font-mono text-gray-300 hover:border-neonCyan/40 transition">
+                    <i class="fa-solid fa-code text-neonCyan text-base"></i> Web Developers
+                </div>
+                <div class="glass-card rounded-xl p-3 flex items-center justify-center gap-2.5 text-xs font-mono text-gray-300 hover:border-purple-400/40 transition">
+                    <i class="fa-brands fa-discord text-purple-400 text-base"></i> Discord Bot Creators
+                </div>
+                <div class="glass-card rounded-xl p-3 flex items-center justify-center gap-2.5 text-xs font-mono text-gray-300 hover:border-emerald-400/40 transition">
+                    <i class="fa-solid fa-terminal text-emerald-400 text-base"></i> System Programmers
+                </div>
+            </div>
+
+            <!-- Tools Grid -->
+            <div class="pt-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-extrabold text-white flex items-center gap-2.5">
+                        <i class="fa-solid fa-cubes text-neonPink"></i> Dostępne narzędzia:
+                    </h2>
+                    <span class="text-xs font-mono text-gray-400">Dostępne: 2 / 4</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- TOOL 1: Minecraft MOTD Generator (ACTIVE) -->
+                    <div onclick="switchTab('motd')" class="glass-card glass-card-hover animated-border rounded-2xl p-7 cursor-pointer group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-neonPink/10 rounded-bl-full pointer-events-none group-hover:bg-neonPink/20 transition-all duration-500"></div>
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-neonPink/10 border border-neonPink/40 flex items-center justify-center text-neonPink text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cube"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-neonPink/20 text-neonPink border border-neonPink/40">NOWOŚĆ</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-neonPink transition-colors mb-2">Minecraft MOTD Generator</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Zaawansowany edytor opisu serwera z podglądem na żywo w stylu Listy Serwerów Minecraft. Generowanie gradientów HEX/RGB, kodów Legacy (`&`/`§`) oraz nowoczesnego MiniMessage (`<red>`).
+                        </p>
+                        <div class="flex items-center text-neonPink font-bold text-sm gap-2 group-hover:translate-x-2 transition-transform">
+                            Otwórz Generator MOTD <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- TOOL 2: ASCII Generator (ACTIVE) -->
+                    <div onclick="switchTab('ascii')" class="glass-card glass-card-hover animated-border rounded-2xl p-7 cursor-pointer group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-neonCyan/10 rounded-bl-full pointer-events-none group-hover:bg-neonCyan/20 transition-all duration-500"></div>
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-neonCyan/10 border border-neonCyan/40 flex items-center justify-center text-neonCyan text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-font"></i>
+                            </div>
+                            
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-neonCyan transition-colors mb-2">Generator Napisów ASCII</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Konwertuj tekst na cyfrowe banery ASCII Art dla konsoli serwerów, plików README i kodu source. Domyślny brak psujących spacji, 8+ stylów fontów i otoczek.
+                        </p>
+                        <div class="flex items-center text-neonCyan font-bold text-sm gap-2 group-hover:translate-x-2 transition-transform">
+                            Uruchom Generator ASCII <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- TOOL 3: Discord Rich Embed Builder (COMING SOON) -->
+                    <div class="glass-card rounded-2xl p-7 relative opacity-60 hover:opacity-80 transition cursor-not-allowed border-dashed border-gray-700">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
+                                <i class="fa-brands fa-discord"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-gray-800 text-gray-400 border border-gray-700">WKRÓTCE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-300 mb-2">Discord Embed & Webhook Studio</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Wizualny edytor bogatych wiadomości Embed dla botów i webhooków Discord z eksportem do kodu JSON oraz Discord.js / Discord.py.
+                        </p>
+                        <div class="text-gray-500 font-semibold text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-lock text-xs"></i> Moduł w przygotowaniu
+                        </div>
+                    </div>
+
+                    <!-- TOOL 4: Color Config Converter (COMING SOON) -->
+                    <div class="glass-card rounded-2xl p-7 relative opacity-60 hover:opacity-80 transition cursor-not-allowed border-dashed border-gray-700">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-gray-800 text-gray-400 border border-gray-700">WKRÓTCE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-300 mb-2">Konwerter Kolorów Config / YAML</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Błyskawiczna konwersja kolorów w plikach konfiguracyjnych m.in. z `&` na `§` lub RGB Hex z automatycznym usuwaniem błędów składni.
+                        </p>
+                        <div class="text-gray-500 font-semibold text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-lock text-xs"></i> Moduł w przygotowaniu
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 2: MINECRAFT MOTD GENERATOR ==================== -->
+        <section id="view-motd" class="hidden space-y-8 animate-fade-in">
+            
+            <!-- Breadcrumb & Header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                <div>
+                    <button onclick="switchTab('menu')" class="text-xs text-neonCyan hover:underline font-mono mb-1 inline-flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-arrow-left"></i> Powrót do katalogu narzędzi
+                    </button>
+                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                        <i class="fa-solid fa-cube text-neonPink"></i> Minecraft MOTD Generator
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="presetMotd('survival')" class="px-3 py-2 rounded-xl text-xs font-mono bg-neonPink/20 hover:bg-neonPink/30 text-neonPink border border-neonPink/40 transition">
+                        Preset: Survival
+                    </button>
+                    <button onclick="presetMotd('cyber')" class="px-3 py-2 rounded-xl text-xs font-mono bg-neonCyan/20 hover:bg-neonCyan/30 text-neonCyan border border-neonCyan/40 transition">
+                        Preset: Cyber-Network
+                    </button>
+                    <button onclick="resetMotdEditor()" class="px-3 py-2 rounded-xl text-xs font-mono bg-gray-800 hover:bg-gray-700 text-gray-300 transition border border-gray-700">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- LIVE MINECRAFT SERVER LIST PREVIEW SLOT -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-neonCyan flex items-center gap-2">
+                        <i class="fa-solid fa-eye"></i> Podgląd na żywo (Minecraft Server List Preview)
+                    </span>
+                    <span class="text-[11px] font-mono text-gray-500">Symulacja klienta Minecraft 1.20+</span>
+                </div>
+
+                <!-- Realistic Minecraft Multiplayer Slot Component -->
+                <div class="mc-slot rounded-lg p-3 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 max-w-4xl mx-auto overflow-hidden">
+                    
+                    <!-- Server Icon -->
+                    <div class="relative flex-shrink-0">
+                        <img id="mc-icon-preview" src="https://placehold.co/64x64/1f1f3a/00f3ff?text=MC+SRV" alt="MC Icon" class="w-14 h-14 sm:w-16 sm:h-16 rounded border-2 border-gray-700 bg-black object-cover">
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-black" title="Server Online"></div>
+                    </div>
+
+                    <!-- Server Title & MOTD Lines -->
+                    <div class="flex-grow min-w-0 font-mc leading-tight">
+                        <!-- Server Name & Player Info Row -->
+                        <div class="flex items-center justify-between text-base sm:text-xl font-bold text-white mb-1">
+                            <span id="mc-preview-name" class="truncate text-gray-200">Moj Serwer Minecraft</span>
+                            
+                            <!-- Player count and ping icon -->
+                            <div class="flex items-center gap-2 flex-shrink-0 text-sm sm:text-base">
+                                <span id="mc-preview-players" class="text-gray-400 font-mono text-xs sm:text-sm">1.20.x - 2026/2000</span>
+                                <div class="flex items-end gap-[2px] h-4 w-4" title="5 ms (Perfect Connection)">
+                                    <div class="w-1 bg-emerald-500 h-1"></div>
+                                    <div class="w-1 bg-emerald-500 h-2"></div>
+                                    <div class="w-1 bg-emerald-500 h-3"></div>
+                                    <div class="w-1 bg-emerald-500 h-4"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MOTD Line 1 Render -->
+                        <div id="mc-preview-line1" class="text-lg sm:text-2xl text-gray-300 min-h-[26px] whitespace-pre break-words"></div>
+                        <!-- MOTD Line 2 Render -->
+                        <div id="mc-preview-line2" class="text-lg sm:text-2xl text-gray-300 min-h-[26px] whitespace-pre break-words"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- EDITOR & CONTROL GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- LEFT CONTROLS (7 Cols) -->
+                <div class="lg:col-span-7 space-y-6 glass-card rounded-2xl p-6 border-neonPink/30">
+                    <h3 class="text-sm font-bold text-neonPink uppercase tracking-wider font-mono flex items-center gap-2 border-b border-gray-800 pb-3">
+                        <i class="fa-solid fa-pen-to-square"></i> Edytor Zawartości MOTD
+                    </h3>
+
+                    <!-- Server Settings Info -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 uppercase mb-1.5">Nazwa Serwera (Podgląd):</label>
+                            <input type="text" id="motd-srv-name" value="CyberCraft.pl" 
+                                class="w-full bg-darkBg border border-gray-700 focus:border-neonCyan rounded-xl px-3.5 py-2 text-sm text-white font-mono outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 uppercase mb-1.5">Gracze (Podgląd):</label>
+                            <input type="text" id="motd-srv-players" value="1.20.x - 2026/2000" 
+                                class="w-full bg-darkBg border border-gray-700 focus:border-neonCyan rounded-xl px-3.5 py-2 text-sm text-white font-mono outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- MOTD Input Lines -->
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1.5">
+                                <label class="text-xs font-mono text-gray-300 uppercase font-semibold">Linijka 1 MOTD:</label>
+                                <span class="text-[10px] font-mono text-gray-500">Max ~45 znaków w linii</span>
+                            </div>
+                            <input type="text" id="motd-input-line1" value="&r&l&c[CYBER] &b&lNAJLEPSZY SERWER &e2026!" 
+                                class="w-full bg-darkBg border border-gray-700 focus:border-neonPink focus:ring-1 focus:ring-neonPink rounded-xl px-4 py-2.5 text-sm font-mono text-white outline-none transition">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1.5">
+                                <label class="text-xs font-mono text-gray-300 uppercase font-semibold">Linijka 2 MOTD:</label>
+                                <span class="text-[10px] font-mono text-gray-500">Używaj kodów & lub tagów</span>
+                            </div>
+                            <input type="text" id="motd-input-line2" value="&a&lWEJDZ JUZ TERAZ &7&o-> &f&nMC.CYBERCRAFT.PL" 
+                                class="w-full bg-darkBg border border-gray-700 focus:border-neonPink focus:ring-1 focus:ring-neonPink rounded-xl px-4 py-2.5 text-sm font-mono text-white outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- COLOR PALETTE BUTTONS -->
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 uppercase mb-2 font-semibold">Wstaw Kolor Legacy (&):</label>
+                        <div class="grid grid-cols-8 sm:grid-cols-8 gap-1.5">
+                            <button onclick="insertCode('&0')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#000000;" title="&0 Black">&0</button>
+                            <button onclick="insertCode('&1')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#0000AA;" title="&1 Dark Blue">&1</button>
+                            <button onclick="insertCode('&2')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#00AA00;" title="&2 Dark Green">&2</button>
+                            <button onclick="insertCode('&3')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#00AAAA;" title="&3 Dark Aqua">&3</button>
+                            <button onclick="insertCode('&4')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#AA0000;" title="&4 Dark Red">&4</button>
+                            <button onclick="insertCode('&5')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#AA00AA;" title="&5 Dark Purple">&5</button>
+                            <button onclick="insertCode('&6')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#FFAA00;" title="&6 Gold">&6</button>
+                            <button onclick="insertCode('&7')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#AAAAAA;" title="&7 Gray">&7</button>
+                            
+                            <button onclick="insertCode('&8')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#555555;" title="&8 Dark Gray">&8</button>
+                            <button onclick="insertCode('&9')" class="h-9 rounded-lg font-mono text-xs font-bold text-white border border-gray-700 flex items-center justify-center shadow" style="background:#5555FF;" title="&9 Blue">&9</button>
+                            <button onclick="insertCode('&a')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#55FF55;" title="&a Green">&a</button>
+                            <button onclick="insertCode('&b')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#55FFFF;" title="&b Aqua">&b</button>
+                            <button onclick="insertCode('&c')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#FF5555;" title="&c Red">&c</button>
+                            <button onclick="insertCode('&d')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#FF55FF;" title="&d Light Purple">&d</button>
+                            <button onclick="insertCode('&e')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#FFFF55;" title="&e Yellow">&e</button>
+                            <button onclick="insertCode('&f')" class="h-9 rounded-lg font-mono text-xs font-bold text-black border border-gray-700 flex items-center justify-center shadow" style="background:#FFFFFF;" title="&f White">&f</button>
+                        </div>
+                    </div>
+
+                    <!-- FORMATTING CODES -->
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 uppercase mb-2 font-semibold">Formatowanie Tekstu:</label>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                            <button onclick="insertCode('&l')" class="px-2.5 py-2 rounded-xl bg-darkBg border border-gray-700 hover:border-neonCyan font-mono text-xs font-bold text-white transition">&l Bold</button>
+                            <button onclick="insertCode('&o')" class="px-2.5 py-2 rounded-xl bg-darkBg border border-gray-700 hover:border-neonCyan font-mono text-xs italic text-white transition">&o Italic</button>
+                            <button onclick="insertCode('&n')" class="px-2.5 py-2 rounded-xl bg-darkBg border border-gray-700 hover:border-neonCyan font-mono text-xs underline text-white transition">&n Underline</button>
+                            <button onclick="insertCode('&m')" class="px-2.5 py-2 rounded-xl bg-darkBg border border-gray-700 hover:border-neonCyan font-mono text-xs line-through text-white transition">&m Strike</button>
+                            <button onclick="insertCode('&k')" class="px-2.5 py-2 rounded-xl bg-darkBg border border-gray-700 hover:border-neonCyan font-mono text-xs text-neonPink transition">&k Magic</button>
+                            <button onclick="insertCode('&r')" class="px-2.5 py-2 rounded-xl bg-darkBg border border-gray-700 hover:border-neonPink font-mono text-xs text-gray-400 transition">&r Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- HEX GRADIENT GENERATOR -->
+                    <div class="p-4 rounded-xl bg-darkBg/80 border border-gray-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-bold text-neonCyan uppercase flex items-center gap-2">
+                                <i class="fa-solid fa-palette"></i> Generator Gradientu HEX / RGB
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[11px] font-mono text-gray-400">Kolor 1:</span>
+                                <input type="color" id="grad-color-1" value="#ff2a8d" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0">
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[11px] font-mono text-gray-400">Kolor 2:</span>
+                                <input type="color" id="grad-color-2" value="#00f3ff" class="w-8 h-8 rounded cursor-pointer bg-transparent border-0">
+                            </div>
+                            <button onclick="applyGradientToLine(1)" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-neonCyan/20 text-neonCyan border border-neonCyan/40 hover:bg-neonCyan/30 transition">
+                                Gradient na Linijkę 1
+                            </button>
+                            <button onclick="applyGradientToLine(2)" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-neonPink/20 text-neonPink border border-neonPink/40 hover:bg-neonPink/30 transition">
+                                Gradient na Linijkę 2
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT OUTPUT CODE BOXES (5 Cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    
+                    <!-- LEGACY FORMAT OUTPUT BOX -->
+                    <div class="glass-card rounded-2xl p-6 border-neonCyan/40 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-mono font-bold text-neonCyan uppercase flex items-center gap-2">
+                                    <i class="fa-solid fa-code"></i> Format 1: Legacy Code (& / §)
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleLegacySymbol('&')" id="sym-btn-and" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-neonCyan text-black">Użyj &</button>
+                                    <button onclick="toggleLegacySymbol('§')" id="sym-btn-section" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-gray-800 text-gray-400">Użyj §</button>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-400 mb-2">Dla standardowych serwerów Bukkit / Spigot / Paper w `server.properties` lub pluginów.</p>
+                            <textarea id="motd-output-legacy" readonly rows="3" 
+                                class="w-full bg-black/90 border border-gray-800 rounded-xl p-3 text-xs font-mono text-neonCyan outline-none resize-none select-all"></textarea>
+                        </div>
+                        <button onclick="copyMotd('legacy')" class="btn-neon-cyan w-full py-2.5 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-copy"></i> Kopiuj Kod Legacy
+                        </button>
+                    </div>
+
+                    <!-- MODERN / MINIMESSAGE FORMAT OUTPUT BOX -->
+                    <div class="glass-card rounded-2xl p-6 border-neonPink/40 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-mono font-bold text-neonPink uppercase flex items-center gap-2">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> Format 2: Modern / MiniMessage
+                                </span>
+                                <span class="text-[10px] font-mono text-gray-500">Paper / Purpur / MiniMessage</span>
+                            </div>
+                            <p class="text-[11px] text-gray-400 mb-2">Nowoczesny format tagów HTML-style stosowany w nowszych silnikach i pluginach jak Kyori.</p>
+                            <textarea id="motd-output-modern" readonly rows="3" 
+                                class="w-full bg-black/90 border border-gray-800 rounded-xl p-3 text-xs font-mono text-neonPink outline-none resize-none select-all"></textarea>
+                        </div>
+                        <button onclick="copyMotd('modern')" class="btn-neon-pink w-full py-2.5 rounded-xl text-xs font-mono font-bold text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-copy"></i> Kopiuj Kod MiniMessage
+                        </button>
+                    </div>
+
+                    <!-- Tips Box -->
+                    <div class="p-4 rounded-xl bg-gray-900/60 border border-gray-800 text-xs font-mono text-gray-400 space-y-1.5">
+                        <div class="text-white font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-yellow-400"></i> Wskazówka dla Dewelopera:
+                        </div>
+                        <p>Plik <code class="text-neonCyan">server.properties</code> w sekcji <code class="text-neonCyan">motd=</code> akceptuje znaki <code class="text-neonPink">\u00A7</code> lub kody <code class="text-neonPink">&</code> przy odpowiednich pluginach (np. MiniMOTD, ServerListPlus).</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 3: ASCII BANNER GENERATOR ==================== -->
+        <section id="view-ascii" class="hidden space-y-6 animate-fade-in">
+            
+            <!-- Breadcrumb Header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                <div>
+                    <button onclick="switchTab('menu')" class="text-xs text-neonCyan hover:underline font-mono mb-1 inline-flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-arrow-left"></i> Powrót do katalogu narzędzi
+                    </button>
+                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                        <i class="fa-solid fa-font text-neonCyan"></i> Generator Banerów ASCII
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="randomizeAscii()" class="px-3.5 py-2 rounded-xl text-xs font-mono font-bold bg-neonPink/20 hover:bg-neonPink/30 text-neonPink border border-neonPink/40 transition flex items-center gap-2">
+                        <i class="fa-solid fa-dice"></i> Losuj Styl
+                    </button>
+                    <button onclick="resetAsciiGenerator()" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-gray-800 hover:bg-gray-700 text-gray-300 transition flex items-center gap-2 border border-gray-700">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Workspace Layout Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- CONTROLS PANEL (Left Side 4 Cols) -->
+                <div class="lg:col-span-4 glass-card rounded-2xl p-6 space-y-6 border-neonCyan/30 shadow-xl">
+                    <h3 class="text-base font-bold text-neonCyan uppercase tracking-wider font-mono flex items-center gap-2 border-b border-gray-800 pb-3">
+                        <i class="fa-solid fa-sliders"></i> Konfigurator Banneru
+                    </h3>
+
+                    <!-- Text Input -->
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 uppercase mb-2 font-semibold">Twój Tekst / Napis:</label>
+                        <input type="text" id="ascii-text-input" value="EASYDEV" placeholder="Wpisz słowo..." 
+                            class="w-full bg-darkBg border border-gray-700 focus:border-neonCyan focus:ring-1 focus:ring-neonCyan rounded-xl px-4 py-3 text-white font-mono placeholder-gray-600 outline-none transition font-bold tracking-wider">
+                    </div>
+
+                    <!-- Font Style Selector -->
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 uppercase mb-2 font-semibold">Styl Czcionki (8+ Styles):</label>
+                        <select id="ascii-font-style" class="w-full bg-darkBg border border-gray-700 focus:border-neonCyan focus:ring-1 focus:ring-neonCyan rounded-xl px-4 py-3 text-white font-mono outline-none transition cursor-pointer font-medium">
+                            <option value="block">1. Block (Cyber Big)</option>
+                            <option value="slant">2. Slant (Modern Slash)</option>
+                            <option value="doom">3. Doom 3D (Heavy)</option>
+                            <option value="banner">4. Banner (Classic Square)</option>
+                            <option value="mini">5. Mini (Compact Terminal)</option>
+                            <option value="matrix">6. Digital Matrix</option>
+                            <option value="shade">7. Shaded Glitch (░▒▓█)</option>
+                            <option value="cyber">8. Cybertech Outline</option>
+                        </select>
+                    </div>
+
+                    <!-- Character Fill Selector -->
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 uppercase mb-2 font-semibold">Znak Wypełnienia:</label>
+                        <div class="grid grid-cols-5 gap-2 mb-2">
+                            <button onclick="setFillChar('█')" class="fill-char-btn active-fill px-2 py-2 rounded-lg border border-neonCyan bg-neonCyan/20 text-xs font-mono font-bold text-neonCyan transition">█</button>
+                            <button onclick="setFillChar('#')" class="fill-char-btn px-2 py-2 rounded-lg border border-gray-700 bg-darkBg text-xs font-mono text-gray-300 hover:border-neonCyan transition">#</button>
+                            <button onclick="setFillChar('@')" class="fill-char-btn px-2 py-2 rounded-lg border border-gray-700 bg-darkBg text-xs font-mono text-gray-300 hover:border-neonCyan transition">@</button>
+                            <button onclick="setFillChar('*')" class="fill-char-btn px-2 py-2 rounded-lg border border-gray-700 bg-darkBg text-xs font-mono text-gray-300 hover:border-neonCyan transition">*</button>
+                            <button onclick="setFillChar('$')" class="fill-char-btn px-2 py-2 rounded-lg border border-gray-700 bg-darkBg text-xs font-mono text-gray-300 hover:border-neonCyan transition">$</button>
+                        </div>
+                        <input type="text" id="ascii-custom-char" maxlength="1" placeholder="Własny znak (np. &)" 
+                            class="w-full bg-darkBg border border-gray-800 text-xs font-mono px-3 py-2 rounded-lg text-neonCyan placeholder-gray-600 outline-none focus:border-neonCyan transition">
+                    </div>
+
+                    <!-- Border Decoration Style -->
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 uppercase mb-2 font-semibold">Styl Ramki / Otoczki:</label>
+                        <select id="ascii-border-style" class="w-full bg-darkBg border border-gray-700 focus:border-neonCyan focus:ring-1 focus:ring-neonCyan rounded-xl px-4 py-2.5 text-xs text-white font-mono outline-none transition cursor-pointer">
+                            <option value="none">Brak Ramki (Czysty)</option>
+                            <option value="cyber">Cyber Frame (┌──┐)</option>
+                            <option value="box">Standard Box (+--+)</option>
+                            <option value="stars">Stars Outline (****)</option>
+                            <option value="double">Double Line (╔══╗)</option>
+                        </select>
+                    </div>
+
+                    <!-- Spacing Sliders -->
+                    <div class="space-y-4 pt-2 border-t border-gray-800">
+                        <div>
+                            <div class="flex justify-between items-center mb-1.5">
+                                <label class="text-xs font-mono text-gray-300 uppercase">Odstęp Między Literami:</label>
+                                <span id="ascii-spacing-val" class="text-xs font-mono font-bold text-neonPink bg-neonPink/10 px-2 py-0.5 rounded border border-neonPink/30">1</span>
+                            </div>
+                            <input type="range" id="ascii-spacing-slider" min="0" max="4" value="1" step="1" 
+                                class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1.5">
+                                <label class="text-xs font-mono text-gray-300 uppercase">Rozmiar Podglądu:</label>
+                                <span id="ascii-scale-val" class="text-xs font-mono font-bold text-neonCyan bg-neonCyan/10 px-2 py-0.5 rounded border border-neonCyan/30">100%</span>
+                            </div>
+                            <input type="range" id="ascii-scale-slider" min="60" max="140" value="100" step="10" 
+                                class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Uppercase Toggle -->
+                    <div class="pt-2 border-t border-gray-800">
+                        <label class="flex items-center justify-between cursor-pointer">
+                            <span class="text-xs font-mono text-gray-300">Wymuś Wielkie Litery (UPPERCASE)</span>
+                            <input type="checkbox" id="ascii-uppercase-toggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neonCyan relative"></div>
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- PREVIEW TERMINAL (Right Side 8 Cols) -->
+                <div class="lg:col-span-8 flex flex-col space-y-4">
+                    
+                    <div class="glass-card rounded-2xl overflow-hidden border-neonCyan/40 flex flex-col flex-grow shadow-2xl relative">
+                        <!-- Terminal Top Header Bar -->
+                        <div class="bg-gray-950/90 px-5 py-3 border-b border-gray-800 flex items-center justify-between z-10">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                <span class="text-xs font-mono text-gray-400 ml-3">ascii-output.txt - Monospaced Terminal</span>
+                            </div>
+                            
+                            <!-- Color Themes -->
+                            <div class="flex items-center gap-2">
+                                <button onclick="setTerminalTheme('cyber')" class="w-4 h-4 rounded-full bg-neonCyan ring-2 ring-offset-2 ring-offset-darkBg ring-neonCyan/50" title="Cyber Neon"></button>
+                                <button onclick="setTerminalTheme('matrix')" class="w-4 h-4 rounded-full bg-emerald-400 ring-2 ring-offset-2 ring-offset-darkBg ring-transparent hover:ring-emerald-400/50" title="Matrix Green"></button>
+                                <button onclick="setTerminalTheme('amber')" class="w-4 h-4 rounded-full bg-amber-400 ring-2 ring-offset-2 ring-offset-darkBg ring-transparent hover:ring-amber-400/50" title="Retro Amber"></button>
+                                <button onclick="setTerminalTheme('vapor')" class="w-4 h-4 rounded-full bg-purple-500 ring-2 ring-offset-2 ring-offset-darkBg ring-transparent hover:ring-purple-500/50" title="Vaporwave Pink"></button>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Screen Box (Preserves Spacing Exactly) -->
+                        <div class="p-6 bg-black/95 flex-grow min-h-[380px] max-h-[550px] overflow-auto relative flex items-center justify-center border-b border-gray-800">
+                            <pre id="ascii-output" class="exact-ascii text-neonCyan text-center leading-tight transition-all duration-200 select-all"></pre>
+                        </div>
+
+                        <!-- Action Bar Bottom -->
+                        <div class="bg-gray-950/90 px-6 py-4 flex flex-wrap items-center justify-between gap-4 z-10">
+                            <div class="text-xs font-mono text-gray-400 flex items-center gap-4">
+                                <span>Linijki: <strong id="stat-lines" class="text-white">0</strong></span>
+                                <span>Znaki: <strong id="stat-chars" class="text-white">0</strong></span>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-2.5">
+                                <button onclick="clearAsciiText()" class="px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-gray-800 hover:bg-gray-700 text-gray-300 transition border border-gray-700">
+                                    <i class="fa-solid fa-eraser"></i> Wyczyść
+                                </button>
+                                <button onclick="downloadAsciiTxt()" class="px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-gray-800 hover:bg-gray-700 text-neonCyan transition border border-neonCyan/30">
+                                    <i class="fa-solid fa-download"></i> Pobierz .TXT
+                                </button>
+                                <button onclick="copyAsciiToClipboard()" id="btn-copy-ascii" class="btn-neon-cyan px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-black flex items-center gap-2 shadow-lg">
+                                    <i class="fa-solid fa-copy"></i> Kopiuj ASCII (Bez Rozjeżdżania)
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SETTINGS MODAL DIALOG -->
+    <div id="settings-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-all duration-300">
+        <div class="glass-card border-neonCyan/50 rounded-2xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl relative transform scale-95 transition-transform duration-300" id="settings-modal-card">
+            
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2.5 font-mono">
+                    <i class="fa-solid fa-sliders text-neonCyan"></i> Ustawienia Animacji
+                </h3>
+                <button onclick="closeSettingsModal()" class="text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <label class="block text-xs font-mono uppercase text-gray-300 font-bold">Poziom Efektów i Animacji:</label>
+
+                <!-- LOW ANIMATION OPTION -->
+                <div onclick="setAnimationLevel('low')" id="option-anim-low" class="p-4 rounded-xl border border-gray-800 bg-darkBg/90 cursor-pointer hover:border-gray-600 transition flex items-start gap-3 group">
+                    <input type="radio" name="anim-level" id="radio-low" class="mt-1 accent-neonCyan cursor-pointer">
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-neonCyan flex items-center gap-2">
+                            <span>LOW (Podstawowe)</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-gray-800 text-gray-400 border border-gray-700">Płynność FPS</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">Wyłącza ruchem tła, obracanie ramek, uniesienia postaci i obniża liczbę cząsteczek. Rekomendowane dla słabszych urządzeń.</p>
+                    </div>
+                </div>
+
+                <!-- HIGH ANIMATION OPTION -->
+                <div onclick="setAnimationLevel('high')" id="option-anim-high" class="p-4 rounded-xl border border-neonCyan/50 bg-neonCyan/5 cursor-pointer transition flex items-start gap-3 group">
+                    <input type="radio" name="anim-level" id="radio-high" class="mt-1 accent-neonCyan cursor-pointer" checked>
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-neonPink flex items-center gap-2">
+                            <span>HIGH (Super Ultra)</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-neonCyan/20 text-neonCyan border border-neonCyan/40">Pełny Cyberpunk</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">Pełny zestaw animacji, obracane neony, fala poświaty, interaktywne cząsteczki i unosząca się postać Skina.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="closeSettingsModal()" class="btn-neon-cyan w-full py-3 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-check"></i> Zapisz i Zamknij
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPROVED FOOTER -->
+    <footer class="relative z-10 border-t border-gray-800/80 glass-card mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-gray-800/80">
+                <!-- Footer Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-neonPink to-neonCyan flex items-center justify-center p-[2px]">
+                        <div class="w-full h-full bg-darkBg rounded-[6px] flex items-center justify-center">
+                            <i class="fa-solid fa-code text-neonCyan text-base"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-lg font-black tracking-wider text-white">EasyDev <span class="text-neonPink">Tools</span></span>
+                        <span class="block text-[10px] font-mono text-gray-400">Professional Developer Utilities Suite</span>
+                    </div>
+                </div>
+
+                <!-- Footer Quick Nav -->
+                <div class="flex items-center gap-4 text-xs font-mono text-gray-400">
+                    <button onclick="switchTab('menu')" class="hover:text-neonCyan transition">Katalog</button>
+                    <span>•</span>
+                    <button onclick="switchTab('motd')" class="hover:text-neonPink transition">Generator MOTD</button>
+                    <span>•</span>
+                    <button onclick="switchTab('ascii')" class="hover:text-neonCyan transition">Banner ASCII</button>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Row: Copyright & Credits -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-400">
+                <div>
+                    &copy; 2026 <span class="text-white font-bold">EasyDev Tools</span>. Wszelkie prawa zastrzeżone.
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>Stworzone dla społeczności przez:</span>
+                    <span class="text-neonCyan font-bold px-2.5 py-1 rounded bg-neonCyan/10 border border-neonCyan/30 shadow-sm">By: PremiumCode</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-card border-neonCyan/60 px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3 text-white font-mono text-sm bg-darkBg/95">
+            <i class="fa-solid fa-circle-check text-neonCyan text-lg" id="toast-icon"></i>
+            <span id="toast-message">Skopiowano zawartość do schowka!</span>
+        </div>
+    </div>
+
+    <script>
+        // CANVAS PARTICLE SYSTEM
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+        let currentAnimLevel = localStorage.getItem('easydev_anim_level') || 'high';
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.color = Math.random() > 0.5 ? '#00f3ff' : '#ff2a8d';
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                if (mouse.x != null && currentAnimLevel === 'high') {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        let angle = Math.atan2(dy, dx);
+                        let force = (mouse.radius - dist) / mouse.radius;
+                        this.x -= Math.cos(angle) * force * 2;
+                        this.y -= Math.sin(angle) * force * 2;
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const baseCount = currentAnimLevel === 'high' ? 75 : 18;
+            const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 18000), baseCount);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                if (currentAnimLevel === 'high') {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let dx = particles[i].x - particles[j].x;
+                        let dy = particles[i].y - particles[j].y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 110) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = particles[i].color === '#00f3ff' 
+                                ? `rgba(0, 243, 255, ${1 - dist / 110})` 
+                                : `rgba(255, 42, 141, ${1 - dist / 110})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        // SETTINGS MODAL LOGIC
+        function openSettingsModal() {
+            const modal = document.getElementById('settings-modal');
+            const card = document.getElementById('settings-modal-card');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                card.classList.remove('scale-95');
+                card.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeSettingsModal() {
+            const modal = document.getElementById('settings-modal');
+            const card = document.getElementById('settings-modal-card');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function setAnimationLevel(level) {
+            currentAnimLevel = level;
+            localStorage.setItem('easydev_anim_level', level);
+            const body = document.getElementById('app-body');
+            
+            if (level === 'low') {
+                body.classList.remove('anim-high');
+                body.classList.add('anim-low');
+                document.getElementById('radio-low').checked = true;
+                document.getElementById('radio-high').checked = false;
+                document.getElementById('option-anim-low').className = "p-4 rounded-xl border border-neonCyan/50 bg-neonCyan/5 cursor-pointer transition flex items-start gap-3 group";
+                document.getElementById('option-anim-high').className = "p-4 rounded-xl border border-gray-800 bg-darkBg/90 cursor-pointer hover:border-gray-600 transition flex items-start gap-3 group";
+            } else {
+                body.classList.remove('anim-low');
+                body.classList.add('anim-high');
+                document.getElementById('radio-high').checked = true;
+                document.getElementById('radio-low').checked = false;
+                document.getElementById('option-anim-high').className = "p-4 rounded-xl border border-neonCyan/50 bg-neonCyan/5 cursor-pointer transition flex items-start gap-3 group";
+                document.getElementById('option-anim-low').className = "p-4 rounded-xl border border-gray-800 bg-darkBg/90 cursor-pointer hover:border-gray-600 transition flex items-start gap-3 group";
+            }
+            initParticles();
+        }
+
+
+        // MINECRAFT MOTD LOGIC
+        let legacySymbol = '&';
+
+        const MC_COLORS = {
+            '0': '#000000', '1': '#0000AA', '2': '#00AA00', '3': '#00AAAA',
+            '4': '#AA0000', '5': '#AA00AA', '6': '#FFAA00', '7': '#AAAAAA',
+            '8': '#555555', '9': '#5555FF', 'a': '#55FF55', 'b': '#55FFFF',
+            'c': '#FF5555', 'd': '#FF55FF', 'e': '#FFFF55', 'f': '#FFFFFF'
+        };
+
+        const MINIMESSAGE_TAG_MAP = {
+            '0': '<black>', '1': '<dark_blue>', '2': '<dark_green>', '3': '<dark_aqua>',
+            '4': '<dark_red>', '5': '<dark_purple>', '6': '<gold>', '7': '<gray>',
+            '8': '<dark_gray>', '9': '<blue>', 'a': '<green>', 'b': '<aqua>',
+            'c': '<red>', 'd': '<light_purple>', 'e': '<yellow>', 'f': '<white>',
+            'l': '<bold>', 'o': '<italic>', 'n': '<underlined>', 'm': '<strikethrough>',
+            'k': '<obfuscated>', 'r': '<reset>'
+        };
+
+        function updateMotd() {
+            const line1Input = document.getElementById('motd-input-line1').value;
+            const line2Input = document.getElementById('motd-input-line2').value;
+            const srvName = document.getElementById('motd-srv-name').value;
+            const srvPlayers = document.getElementById('motd-srv-players').value;
+
+            document.getElementById('mc-preview-name').innerText = srvName || "Minecraft Server";
+            document.getElementById('mc-preview-players').innerText = srvPlayers || "0/100";
+
+            document.getElementById('mc-preview-line1').innerHTML = parseMcToHtml(line1Input);
+            document.getElementById('mc-preview-line2').innerHTML = parseMcToHtml(line2Input);
+
+            generateMotdOutputCodes(line1Input, line2Input);
+        }
+
+        function parseMcToHtml(text) {
+            if (!text) return "&nbsp;";
+            
+            let curColor = "#FFFFFF";
+            let isBold = false;
+            let isItalic = false;
+            let isUnderline = false;
+            let isStrike = false;
+            let isObfuscated = false;
+
+            let html = "";
+            let i = 0;
+
+            while (i < text.length) {
+                if ((text[i] === '&' || text[i] === '§') && i + 1 < text.length) {
+                    let code = text[i + 1].toLowerCase();
+                    if (MC_COLORS[code]) {
+                        curColor = MC_COLORS[code];
+                        isBold = isItalic = isUnderline = isStrike = isObfuscated = false;
+                    } else if (code === 'l') isBold = true;
+                    else if (code === 'o') isItalic = true;
+                    else if (code === 'n') isUnderline = true;
+                    else if (code === 'm') isStrike = true;
+                    else if (code === 'k') isObfuscated = true;
+                    else if (code === 'r') {
+                        curColor = "#FFFFFF";
+                        isBold = isItalic = isUnderline = isStrike = isObfuscated = false;
+                    }
+                    i += 2;
+                    continue;
+                }
+
+                let char = text[i];
+                let styles = [];
+                styles.push(`color: ${curColor}`);
+                if (isBold) styles.push('font-weight: bold');
+                if (isItalic) styles.push('font-style: italic');
+                
+                let textDecor = [];
+                if (isUnderline) textDecor.push('underline');
+                if (isStrike) textDecor.push('line-through');
+                if (textDecor.length > 0) styles.push(`text-decoration: ${textDecor.join(' ')}`);
+
+                let displayChar = char === ' ' ? '&nbsp;' : char;
+                if (isObfuscated) {
+                    const randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    displayChar = randomChars[Math.floor(Math.random() * randomChars.length)];
+                }
+
+                html += `<span style="${styles.join('; ')}">${displayChar}</span>`;
+                i++;
+            }
+
+            return html;
+        }
+
+        function generateMotdOutputCodes(line1, line2) {
+            let sym = legacySymbol;
+            let legacy1 = line1.replace(/[&§]/g, sym);
+            let legacy2 = line2.replace(/[&§]/g, sym);
+            let legacyFull = `${legacy1}\\n${legacy2}`;
+            document.getElementById('motd-output-legacy').value = legacyFull;
+
+            let modern1 = convertToMiniMessage(line1);
+            let modern2 = convertToMiniMessage(line2);
+            let modernFull = `${modern1}<newline>${modern2}`;
+            document.getElementById('motd-output-modern').value = modernFull;
+        }
+
+        function convertToMiniMessage(text) {
+            let result = text;
+            for (let code in MINIMESSAGE_TAG_MAP) {
+                let tag = MINIMESSAGE_TAG_MAP[code];
+                let reg = new RegExp(`[&§]${code}`, 'gi');
+                result = result.replace(reg, tag);
+            }
+            return result;
+        }
+
+        function insertCode(code) {
+            const line1 = document.getElementById('motd-input-line1');
+            const start = line1.selectionStart;
+            const end = line1.selectionEnd;
+            const text = line1.value;
+
+            line1.value = text.substring(0, start) + code + text.substring(end);
+            line1.focus();
+            line1.selectionStart = line1.selectionEnd = start + code.length;
+            updateMotd();
+        }
+
+        function toggleLegacySymbol(sym) {
+            legacySymbol = sym;
+            document.getElementById('sym-btn-and').className = sym === '&' 
+                ? "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-neonCyan text-black" 
+                : "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-gray-800 text-gray-400";
+            document.getElementById('sym-btn-section').className = sym === '§' 
+                ? "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-neonPink text-white" 
+                : "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-gray-800 text-gray-400";
+            updateMotd();
+        }
+
+        function applyGradientToLine(lineNum) {
+            const c1 = document.getElementById('grad-color-1').value;
+            const c2 = document.getElementById('grad-color-2').value;
+            const inputEl = document.getElementById(`motd-input-line${lineNum}`);
+            let text = inputEl.value.replace(/&[0-9a-fk-r]/gi, '').trim();
+            if (!text) text = "CYBERCRAFT NETWORK";
+
+            let miniGrad = `<gradient:${c1}:${c2}>${text}</gradient>`;
+            inputEl.value = miniGrad;
+            updateMotd();
+            showToast(`Zastosowano gradient ${c1} -> ${c2} na Linijkę ${lineNum}!`, true);
+        }
+
+        function presetMotd(type) {
+            if (type === 'survival') {
+                document.getElementById('motd-input-line1').value = "&r&l&2[SURVIVAL+EDYCJA] &a&lNOWY SEZON 2026!";
+                document.getElementById('motd-input-line2').value = "&e&lEVENT X2 DROP &7| &b&nMC.SURV24.PL";
+            } else if (type === 'cyber') {
+                document.getElementById('motd-input-line1').value = "&r&l&c[CYBER] &b&lNAJLEPSZY SERWER &e2026!";
+                document.getElementById('motd-input-line2').value = "&a&lWEJDZ JUZ TERAZ &7&o-> &f&nMC.CYBERCRAFT.PL";
+            }
+            updateMotd();
+            showToast("Wczytano gotowy szablon MOTD!", true);
+        }
+
+        function resetMotdEditor() {
+            presetMotd('cyber');
+            document.getElementById('motd-srv-name').value = "CyberCraft.pl";
+            document.getElementById('motd-srv-players').value = "1.20.x - 2026/2000";
+            updateMotd();
+            showToast("Zresetowano Edytor MOTD", true);
+        }
+
+        function copyMotd(format) {
+            const elementId = format === 'legacy' ? 'motd-output-legacy' : 'motd-output-modern';
+            const val = document.getElementById(elementId).value;
+            copyTextToClipboard(val, `Skopiowano kod MOTD (${format.toUpperCase()})!`);
+        }
+
+
+        // ASCII GENERATOR LOGIC
+        let selectedFillChar = '█';
+        let rawGeneratedAsciiText = "";
+
+        const ASCII_FONTS = {
+            block: {
+                height: 3,
+                map: {
+                    'A': [" █▀█ ", " █▀█ ", " ▀ ▀ "],
+                    'B': [" █▀▄ ", " █▀▄ ", " ▀▀  "],
+                    'C': [" █▀▀ ", " █   ", " ▀▀▀ "],
+                    'D': [" █▀▄ ", " █ █ ", " ▀▀  "],
+                    'E': [" █▀▀ ", " █▀▀ ", " ▀▀▀ "],
+                    'F': [" █▀▀ ", " █▀  ", " ▀   "],
+                    'G': [" █▀▀ ", " █ █ ", " ▀▀▀ "],
+                    'H': [" █ █ ", " █▀█ ", " ▀ ▀ "],
+                    'I': ["  █  ", "  █  ", "  ▀  "],
+                    'J': ["  █  ", " ██  ", " ▀▀  "],
+                    'K': [" █ █ ", " █▀  ", " ▀ ▀ "],
+                    'L': [" █   ", " █   ", " ▀▀▀ "],
+                    'M': [" █▄█ ", " █ █ ", " ▀ ▀ "],
+                    'N': [" █▄█ ", " █ █ ", " ▀ ▀ "],
+                    'O': [" █▀█ ", " █ █ ", " ▀▀▀ "],
+                    'P': [" █▀█ ", " █▀▀ ", " ▀   "],
+                    'Q': [" █▀█ ", " █ █ ", " ▀▀█ "],
+                    'R': [" █▀▄ ", " █▀▄ ", " ▀ ▀ "],
+                    'S': [" █▀▀ ", " ▀▀█ ", " ▀▀▀ "],
+                    'T': [" ▀█▀ ", "  █  ", "  ▀  "],
+                    'U': [" █ █ ", " █ █ ", " ▀▀▀ "],
+                    'V': [" █ █ ", " █ █ ", "  ▀  "],
+                    'W': [" █ █ ", " █▄█ ", " ▀ ▀ "],
+                    'X': [" ▀▄▀ ", "  █  ", " ▀▄▀ "],
+                    'Y': [" █ █ ", " ▀█▀ ", "  ▀  "],
+                    'Z': [" ▀▀█ ", " ▄▀  ", " ▀▀▀ "],
+                    ' ': ["     ", "     ", "     "]
+                }
+            },
+            slant: {
+                height: 5,
+                map: {
+                    'A': ["   /\\   ", "  /  \\  ", " / /\\ \\ ", "/ /  \\ \\", "\\/    \\/"],
+                    'B': ["  ____  ", " |  _ \\ ", " | |_) |", " |  _ < ", " |_|\\_\\ "],
+                    'C': ["   ████ ", "  ██    ", " ██     ", "  ██    ", "   ████ "],
+                    'D': ["  ████  ", "  ██  █ ", "  ██  █ ", "  ██  █ ", "  ████  "],
+                    'E': [" ██████ ", " ██     ", " █████  ", " ██     ", " ██████ "],
+                    'F': [" ██████ ", " ██     ", " ████   ", " ██     ", " ██     "],
+                    'G': ["   ████ ", "  ██    ", " ██  ██ ", "  ██  █ ", "   ████ "],
+                    'H': [" ██  ██ ", " ██  ██ ", " ██████ ", " ██  ██ ", " ██  ██ "],
+                    'I': [" ████ ", "  ██  ", "  ██  ", "  ██  ", " ████ "],
+                    'J': ["   ████ ", "     ██ ", "     ██ ", " ██  ██ ", "  ████  "],
+                    'K': [" ██  ██ ", " ██ ██  ", " ████   ", " ██ ██  ", " ██  ██ "],
+                    'L': [" ██     ", " ██     ", " ██     ", " ██     ", " ██████ "],
+                    'M': [" ██  ██ ", " ██████ ", " ██  ██ ", " ██  ██ ", " ██  ██ "],
+                    'N': [" ███ ██ ", " ██████ ", " ██  ██ ", " ██  ██ ", " ██ ███ "],
+                    'O': ["  ████  ", " ██  ██ ", " ██  ██ ", " ██  ██ ", "  ████  "],
+                    'P': [" █████  ", " ██  ██ ", " █████  ", " ██     ", " ██     "],
+                    'Q': ["  ████  ", " ██  ██ ", " ██  ██ ", " ██  ██ ", "  █████ "],
+                    'R': [" █████  ", " ██  ██ ", " █████  ", " ██  ██ ", " ██  ██ "],
+                    'S': ["  █████ ", " ██     ", "  ████  ", "     ██ ", " █████  "],
+                    'T': [" ██████ ", "   ██   ", "   ██   ", "   ██   ", "   ██   "],
+                    'U': [" ██  ██ ", " ██  ██ ", " ██  ██ ", " ██  ██ ", "  ████  "],
+                    'V': [" ██  ██ ", " ██  ██ ", " ██  ██ ", "  ████  ", "   ██   "],
+                    'W': [" ██  ██ ", " ██  ██ ", " ██████ ", " ██████ ", " ██  ██ "],
+                    'X': [" ██  ██ ", "  ████  ", "   ██   ", "  ████  ", " ██  ██ "],
+                    'Y': [" ██  ██ ", "  ████  ", "   ██   ", "   ██   ", "   ██   "],
+                    'Z': [" ██████ ", "    ██  ", "   ██   ", "  ██    ", " ██████ "],
+                    ' ': ["        ", "        ", "        ", "        ", "        "]
+                }
+            },
+            doom: {
+                height: 5,
+                map: {
+                    'A': ["  █████  ", " ██   ██ ", " ███████ ", " ██   ██ ", " ██   ██ "],
+                    'B': [" ██████  ", " ██   ██ ", " ██████  ", " ██   ██ ", " ██████  "],
+                    'C': ["  █████  ", " ██      ", " ██      ", " ██      ", "  █████  "],
+                    'D': [" ██████  ", " ██   ██ ", " ██   ██ ", " ██   ██ ", " ██████  "],
+                    'E': [" ███████ ", " ██      ", " █████   ", " ██      ", " ███████ "],
+                    'F': [" ███████ ", " ██      ", " █████   ", " ██      ", " ██      "],
+                    'G': ["  █████  ", " ██      ", " ██  ███ ", " ██   ██ ", "  █████  "],
+                    'H': [" ██   ██ ", " ██   ██ ", " ███████ ", " ██   ██ ", " ██   ██ "],
+                    'I': [" █████ ", "   ██  ", "   ██  ", "   ██  ", " █████ "],
+                    'J': ["      ██ ", "      ██ ", "      ██ ", " ██   ██ ", "  █████  "],
+                    'K': [" ██   ██ ", " ██  ██  ", " █████   ", " ██  ██  ", " ██   ██ "],
+                    'L': [" ██      ", " ██      ", " ██      ", " ██      ", " ███████ "],
+                    'M': [" ██   ██ ", " ███████ ", " ██ █ ██ ", " ██   ██ ", " ██   ██ "],
+                    'N': [" ██   ██ ", " ████ ██ ", " ██ ████ ", " ██   ██ ", " ██   ██ "],
+                    'O': ["  █████  ", " ██   ██ ", " ██   ██ ", " ██   ██ ", "  █████  "],
+                    'P': [" ██████  ", " ██   ██ ", " ██████  ", " ██      ", " ██      "],
+                    'Q': ["  █████  ", " ██   ██ ", " ██   ██ ", " ██  ███ ", "  ██████ "],
+                    'R': [" ██████  ", " ██   ██ ", " ██████  ", " ██   ██ ", " ██   ██ "],
+                    'S': ["  █████  ", " ██      ", "  █████  ", "      ██ ", "  █████  "],
+                    'T': [" ███████ ", "    ██   ", "    ██   ", "    ██   ", "    ██   "],
+                    'U': [" ██   ██ ", " ██   ██ ", " ██   ██ ", " ██   ██ ", "  █████  "],
+                    'V': [" ██   ██ ", " ██   ██ ", " ██   ██ ", "  ██ ██  ", "   ███   "],
+                    'W': [" ██   ██ ", " ██   ██ ", " ██ █ ██ ", " ███████ ", " ██   ██ "],
+                    'X': [" ██   ██ ", "  ██ ██  ", "   ███   ", "  ██ ██  ", " ██   ██ "],
+                    'Y': [" ██   ██ ", "  ██ ██  ", "   ███   ", "    ██   ", "    ██   "],
+                    'Z': [" ███████ ", "    ██   ", "   ██    ", "  ██     ", " ███████ "],
+                    ' ': ["         ", "         ", "         ", "         ", "         "]
+                }
+            },
+            banner: {
+                height: 5,
+                map: {
+                    'A': ["  █  ", " █ █ ", "█████", "█   █", "█   █"],
+                    'B': ["████ ", "█   █", "████ ", "█   █", "████ "],
+                    'C': [" ████", "█    ", "█    ", "█    ", " ████"],
+                    'D': ["████ ", "█   █", "█   █", "█   █", "████ "],
+                    'E': ["█████", "█    ", "████ ", "█    ", "█████"],
+                    'F': ["█████", "█    ", "████ ", "█    ", "█    "],
+                    'G': [" ████", "█    ", "█  ██", "█   █", " ████"],
+                    'H': ["█   █", "█   █", "█████", "█   █", "█   █"],
+                    'I': ["███", " █ ", " █ ", " █ ", "███"],
+                    'J': ["  ███", "   █ ", "   █ ", "█  █ ", " ██  "],
+                    'K': ["█   █", "█  █ ", "███  ", "█  █ ", "█   █"],
+                    'L': ["█    ", "█    ", "█    ", "█    ", "█████"],
+                    'M': ["█   █", "██ ██", "█ █ █", "█   █", "█   █"],
+                    'N': ["█   █", "██  █", "█ █ █", "█  ██", "█   █"],
+                    'O': [" ███ ", "█   █", "█   █", "█   █", " ███ "],
+                    'P': ["████ ", "█   █", "████ ", "█    ", "█    "],
+                    'Q': [" ███ ", "█   █", "█ █ █", "█  █ ", " ██ █"],
+                    'R': ["████ ", "█   █", "████ ", "█  █ ", "█   █"],
+                    'S': [" ████", "█    ", " ███ ", "    █", "████ "],
+                    'T': ["█████", "  █  ", "  █  ", "  █  ", "  █  "],
+                    'U': ["█   █", "█   █", "█   █", "█   █", " ███ "],
+                    'V': ["█   █", "█   █", "█   █", " █ █ ", "  █  "],
+                    'W': ["█   █", "█   █", "█ █ █", "██ ██", "█   █"],
+                    'X': ["█   █", " █ █ ", "  █  ", " █ █ ", "█   █"],
+                    'Y': ["█   █", " █ █ ", "  █  ", "  █  ", "  █  "],
+                    'Z': ["█████", "   █ ", "  █  ", " █   ", "█████"],
+                    ' ': ["     ", "     ", "     ", "     ", "     "]
+                }
+            },
+            mini: {
+                height: 4,
+                map: {
+                    'A': [" █ ", "█ █", "███", "█ █"],
+                    'B': ["██ ", "█▄█", "█▀█", "██ "],
+                    'C': [" █ ", "█  ", "█  ", " █ "],
+                    'D': ["██ ", "█ █", "█ █", "██ "],
+                    'E': ["███", "█▀ ", "█▄ ", "███"],
+                    'F': ["███", "█▀ ", "█  ", "█  "],
+                    'G': [" █ ", "█  ", "█ █", " █ "],
+                    'H': ["█ █", "███", "█ █", "█ █"],
+                    'I': ["█", "█", "█", "█"],
+                    'J': [" █", " █", " █", "█ "],
+                    'K': ["█ █", "██ ", "█ █", "█ █"],
+                    'L': ["█  ", "█  ", "█  ", "███"],
+                    'M': ["█ █", "███", "█ █", "█ █"],
+                    'N': ["██ ", "█ █", "█ █", " ██"],
+                    'O': [" █ ", "█ █", "█ █", " █ "],
+                    'P': ["██ ", "█ █", "██ ", "█  "],
+                    'Q': [" █ ", "█ █", "█ █", " ██"],
+                    'R': ["██ ", "█ █", "██ ", "█ █"],
+                    'S': [" █ ", "▀▄ ", " ▄▀", " █ "],
+                    'T': ["███", " █ ", " █ ", " █ "],
+                    'U': ["█ █", "█ █", "█ █", " █ "],
+                    'V': ["█ █", "█ █", "█ █", " █ "],
+                    'W': ["█ █", "█ █", "███", "█ █"],
+                    'X': ["█ █", " █ ", " █ ", "█ █"],
+                    'Y': ["█ █", " █ ", " █ ", " █ "],
+                    'Z': ["███", "  █", " █ ", "███"],
+                    ' ': ["   ", "   ", "   ", "   "]
+                }
+            },
+            matrix: {
+                height: 4,
+                map: {
+                    'A': ["┌─┐", "├─┤", "┴ ┴", "   "],
+                    'B': ["├─┐", "├─┴", "┴─┘", "   "],
+                    'C': ["┌─┐", "│  ", "└─┘", "   "],
+                    'D': ["┌─┐", "│ │", "└─┘", "   "],
+                    'E': ["┌─┐", "├─ ", "└─┘", "   "],
+                    'F': ["┌─┐", "├─ ", "┴  ", "   "],
+                    'G': ["┌─┐", "│ ┐", "└─┘", "   "],
+                    'H': ["│ │", "├─┤", "┴ ┴", "   "],
+                    'I': ["┬", "│", "┴", " "],
+                    'J': ["  ┬", "  │", "└─┘", "   "],
+                    'K': ["┬ ┬", "├█ ", "┴ ┴", "   "],
+                    'L': ["┬  ", "│  ", "┴─┘", "   "],
+                    'M': ["┌┐┌", "│││", "┴ ┴", "   "],
+                    'N': ["┌┐┐", "│││", "┴└┘", "   "],
+                    'O': ["┌─┐", "│ │", "└─┘", "   "],
+                    'P': ["┌─┐", "├─┘", "┴  ", "   "],
+                    'Q': ["┌─┐", "│ │", "└─█", "   "],
+                    'R': ["┌─┐", "├┬┘", "┴└─", "   "],
+                    'S': ["┌─┐", "└─┐", "└─┘", "   "],
+                    'T': ["┬┼┬", " │ ", " ┴ ", "   "],
+                    'U': ["┬ ┬", "│ │", "└─┘", "   "],
+                    'V': ["┬ ┬", "└┐┌", " └┘", "   "],
+                    'W': ["┬ ┬", "│█│", "└┴┘", "   "],
+                    'X': ["┬ ┬", " ┌┼", "┴ ┴", "   "],
+                    'Y': ["┬ ┬", "└┬┘", " ┴ ", "   "],
+                    'Z': ["┌─┐", " ┌┘", "└─┘", "   "],
+                    ' ': ["   ", "   ", "   ", "   "]
+                }
+            },
+            shade: {
+                height: 4,
+                map: {
+                    'A': [" ░▒▓█▓▒░ ", " █░   ░█ ", " █▀▀▀▀▀█ ", " █░   ░█ "],
+                    'B': [" █▀▀▀▀▄  ", " █░   ░█ ", " █▀▀▀▀▄  ", " █▄▄▄▄▀  "],
+                    'C': [" ░▒▓███░ ", " █░      ", " █░      ", " ░▒▓███░ "],
+                    'D': [" █▀▀▀▀▄  ", " █░   ░█ ", " █░   ░█ ", " █▄▄▄▄▀  "],
+                    'E': [" █▀▀▀▀▀  ", " █▀▀▀    ", " █░      ", " █▄▄▄▄▄  "],
+                    'F': [" █▀▀▀▀▀  ", " █▀▀▀    ", " █░      ", " █░      "],
+                    'G': [" ░▒▓███░ ", " █░  ░░░ ", " █░   ░█ ", " ░▒▓███░ "],
+                    'H': [" █░   ░█ ", " █▀▀▀▀▀█ ", " █░   ░█ ", " █░   ░█ "],
+                    'I': [" ░▒█▒░ ", "   █   ", "   █   ", " ░▒█▒░ "],
+                    'J': ["   ░▒█ ", "    ░█ ", " █  ░█ ", " ░▒▓▀  "],
+                    'K': [" █░  ░█ ", " █▀▀█░  ", " █░  █░ ", " █░   █ "],
+                    'L': [" █░     ", " █░     ", " █░     ", " █▄▄▄▄▄ "],
+                    'M': [" █░   ░█ ", " ██░ ░██ ", " █░█░█░█ ", " █░ ░ ░█ "],
+                    'N': [" █░   ░█ ", " ██░  ░█ ", " █░█░ ░█ ", " █░  ░██ "],
+                    'O': [" ░▒▓███░ ", " █░   ░█ ", " █░   ░█ ", " ░▒▓███░ "],
+                    'P': [" █▀▀▀▀▄  ", " █░   ░█ ", " █▀▀▀▀▀  ", " █░      "],
+                    'Q': [" ░▒▓███░ ", " █░   ░█ ", " █░ ░ ░█ ", " ░▒▓███  "],
+                    'R': [" █▀▀▀▀▄  ", " █░   ░█ ", " █▀▀▀▀▄  ", " █░   ░█ "],
+                    'S': [" ░▒▓███░ ", " ▀▀▀▄░   ", " ░░░▄▀   ", " ░▒▓███░ "],
+                    'T': [" █▀▀█▀▀█ ", "   ░█    ", "   ░█    ", "   ░█    "],
+                    'U': [" █░   ░█ ", " █░   ░█ ", " █░   ░█ ", " ░▒▓███░ "],
+                    'V': [" █░   ░█ ", " █░   ░█ ", " ░█░ ░█░ ", "  ░▒█▒░  "],
+                    'W': [" █░   ░█ ", " █░ ░ ░█ ", " █░█░█░█ ", " ░██░██░ "],
+                    'X': [" █░   ░█ ", "  ░█░█░  ", "  ░█░█░  ", " █░   ░█ "],
+                    'Y': [" █░   ░█ ", " ░█░ ░█░ ", "  ░█░█░  ", "   ░█    "],
+                    'Z': [" █▀▀▀▀▀█ ", "   ░█░   ", "  ░█░    ", " █▄▄▄▄▄█ "],
+                    ' ': ["         ", "         ", "         ", "         "]
+                }
+            },
+            cyber: {
+                height: 4,
+                map: {
+                    'A': [" ╔═╗ ", " ╠═╣ ", " ╩ ╩ ", "     "],
+                    'B': [" ╠═╗ ", " ╠═╩╗", " ╚═╝ ", "     "],
+                    'C': [" ╔═╗ ", " ║   ", " ╚═╝ ", "     "],
+                    'D': [" ╠═╗ ", " ║ ║ ", " ╚═╝ ", "     "],
+                    'E': [" ╠═█ ", " ╠═  ", " ╚═█ ", "     "],
+                    'F': [" ╠═█ ", " ╠═  ", " ╩   ", "     "],
+                    'G': [" ╔═╗ ", " ║ ║ ", " ╚═╝ ", "     "],
+                    'H': [" ║ ║ ", " ╠═╣ ", " ╩ ╩ ", "     "],
+                    'I': [" ╦ ", " ║ ", " ╩ ", "   "],
+                    'J': [" ╦ ", " ║ ", " ╚═╝ ", "   "],
+                    'K': [" ╦ ╦ ", " ╠═╩╗", " ╩ ╩ ", "     "],
+                    'L': [" ╦   ", " ║   ", " ╩═╝ ", "     "],
+                    'M': [" ╔╗╔ ", " ║║║ ", " ╩ ╩ ", "     "],
+                    'N': [" ╔╗╗ ", " ║║║ ", " ╩╚╝ ", "     "],
+                    'O': [" ╔═╗ ", " ║ ║ ", " ╚═╝ ", "     "],
+                    'P': [" ╔═╗ ", " ╠═╝ ", " ╩   ", "     "],
+                    'Q': [" ╔═╗ ", " ║ ║ ", " ╚═█ ", "     "],
+                    'R': [" ╔═╗ ", " ╠═╩╗", " ╩ ╩ ", "     "],
+                    'S': [" ╔═╗ ", " ╚═╗ ", " ╚═╝ ", "     "],
+                    'T': [" ╦╦╦ ", "  ║  ", "  ╩  ", "     "],
+                    'U': [" ╦ ╦ ", " ║ ║ ", " ╚═╝ ", "     "],
+                    'V': [" ╦ ╦ ", " ║ ║ ", "  ╩  ", "     "],
+                    'W': [" ╦ ╦ ", " ║█║ ", " ╚╩╝ ", "     "],
+                    'X': [" ╦ ╦ ", "  ╬  ", " ╩ ╩ ", "     "],
+                    'Y': [" ╦ ╦ ", " ╚╦╝ ", "  ╩  ", "     "],
+                    'Z': [" ╔═╗ ", "  ╔╝ ", " ╚═╝ ", "     "],
+                    ' ': ["     ", "     ", "     ", "     "]
+                }
+            }
+        };
+
+        function generateAscii() {
+            let input = document.getElementById('ascii-text-input').value;
+            const fontKey = document.getElementById('ascii-font-style').value;
+            const borderStyle = document.getElementById('ascii-border-style').value;
+            const uppercaseToggle = document.getElementById('ascii-uppercase-toggle').checked;
+            const spacing = parseInt(document.getElementById('ascii-spacing-slider').value);
+            const scale = parseInt(document.getElementById('ascii-scale-slider').value) / 100;
+            const customCharInput = document.getElementById('ascii-custom-char').value;
+
+            let fillChar = selectedFillChar;
+            if (customCharInput && customCharInput.length > 0) {
+                fillChar = customCharInput[0];
+            }
+
+            if (uppercaseToggle) input = input.toUpperCase();
+            if (!input) input = " ";
+
+            const fontObj = ASCII_FONTS[fontKey] || ASCII_FONTS['block'];
+            const fontHeight = fontObj.height;
+            const fontMap = fontObj.map;
+
+            let resultLines = Array(fontHeight).fill("");
+            const spaceSeparator = " ".repeat(spacing);
+
+            for (let char of input) {
+                const charArt = fontMap[char] || fontMap['?'] || fontMap[' '] || Array(fontHeight).fill("   ");
+                for (let i = 0; i < fontHeight; i++) {
+                    let piece = charArt[i] || "";
+                    if (fillChar !== '█') {
+                        piece = piece.replace(/█/g, fillChar);
+                    }
+                    resultLines[i] += piece + spaceSeparator;
+                }
+            }
+
+            if (borderStyle !== 'none') {
+                const maxLength = Math.max(...resultLines.map(l => l.length));
+                let topBorder = "", bottomBorder = "", sideLeft = "", sideRight = "";
+
+                if (borderStyle === 'cyber') {
+                    topBorder = "┌" + "─".repeat(maxLength + 2) + "┐";
+                    bottomBorder = "└" + "─".repeat(maxLength + 2) + "┘";
+                    sideLeft = "│ "; sideRight = " │";
+                } else if (borderStyle === 'box') {
+                    topBorder = "+" + "─".repeat(maxLength + 2) + "+";
+                    bottomBorder = "+" + "─".repeat(maxLength + 2) + "+";
+                    sideLeft = "| "; sideRight = " |";
+                } else if (borderStyle === 'stars') {
+                    topBorder = "*" + "─".repeat(maxLength + 2) + "*";
+                    bottomBorder = "*" + "─".repeat(maxLength + 2) + "*";
+                    sideLeft = "* "; sideRight = " *";
+                } else if (borderStyle === 'double') {
+                    topBorder = "╔" + "═".repeat(maxLength + 2) + "╗";
+                    bottomBorder = "╚" + "═".repeat(maxLength + 2) + "╝";
+                    sideLeft = "║ "; sideRight = " ║";
+                }
+
+                resultLines = resultLines.map(line => sideLeft + line.padEnd(maxLength, " ") + sideRight);
+                resultLines.unshift(topBorder);
+                resultLines.push(bottomBorder);
+            }
+
+            rawGeneratedAsciiText = resultLines.join("\n");
+
+            const outputElement = document.getElementById('ascii-output');
+            outputElement.style.fontSize = `${0.85 * scale}rem`;
+            outputElement.textContent = rawGeneratedAsciiText;
+
+            document.getElementById('stat-lines').innerText = resultLines.length;
+            document.getElementById('stat-chars').innerText = rawGeneratedAsciiText.length;
+        }
+
+        function copyAsciiToClipboard() {
+            if (!rawGeneratedAsciiText) return;
+            copyTextToClipboard(rawGeneratedAsciiText, "Skopiowano ASCII Art z zachowaniem spacji!");
+        }
+
+        function downloadAsciiTxt() {
+            if (!rawGeneratedAsciiText) return;
+            const blob = new Blob([rawGeneratedAsciiText], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'easydev-ascii-banner.txt';
+            link.click();
+            showToast("Pobrano plik easydev-ascii-banner.txt", true);
+        }
+
+        function setFillChar(char) {
+            selectedFillChar = char;
+            document.querySelectorAll('.fill-char-btn').forEach(btn => {
+                btn.classList.remove('active-fill', 'border-neonCyan', 'bg-neonCyan/20', 'text-neonCyan');
+                btn.classList.add('border-gray-700', 'bg-darkBg', 'text-gray-300');
+                if (btn.innerText.trim() === char) {
+                    btn.classList.add('active-fill', 'border-neonCyan', 'bg-neonCyan/20', 'text-neonCyan');
+                    btn.classList.remove('border-gray-700', 'bg-darkBg', 'text-gray-300');
+                }
+            });
+            generateAscii();
+        }
+
+        function setTerminalTheme(theme) {
+            const output = document.getElementById('ascii-output');
+            output.classList.remove('text-neonCyan', 'text-emerald-400', 'text-amber-400', 'text-purple-400');
+            if (theme === 'cyber') output.classList.add('text-neonCyan');
+            if (theme === 'matrix') output.classList.add('text-emerald-400');
+            if (theme === 'amber') output.classList.add('text-amber-400');
+            if (theme === 'vapor') output.classList.add('text-purple-400');
+        }
+
+        function randomizeAscii() {
+            const fontKeys = Object.keys(ASCII_FONTS);
+            const randomFont = fontKeys[Math.floor(Math.random() * fontKeys.length)];
+            const borderStyles = ['none', 'cyber', 'box', 'stars', 'double'];
+            const randomBorder = borderStyles[Math.floor(Math.random() * borderStyles.length)];
+            const chars = ['█', '#', '@', '*', '$'];
+            
+            document.getElementById('ascii-font-style').value = randomFont;
+            document.getElementById('ascii-border-style').value = randomBorder;
+            document.getElementById('ascii-spacing-slider').value = Math.floor(Math.random() * 3);
+            document.getElementById('ascii-spacing-val').innerText = document.getElementById('ascii-spacing-slider').value;
+            document.getElementById('ascii-custom-char').value = '';
+            
+            setFillChar(chars[Math.floor(Math.random() * chars.length)]);
+            showToast("Wylosowano nowy styl i układ ASCII!", true);
+        }
+
+        function resetAsciiGenerator() {
+            document.getElementById('ascii-text-input').value = 'EASYDEV';
+            document.getElementById('ascii-font-style').value = 'block';
+            document.getElementById('ascii-border-style').value = 'cyber';
+            document.getElementById('ascii-spacing-slider').value = '1';
+            document.getElementById('ascii-spacing-val').innerText = '1';
+            document.getElementById('ascii-scale-slider').value = '100';
+            document.getElementById('ascii-scale-val').innerText = '100%';
+            document.getElementById('ascii-uppercase-toggle').checked = true;
+            document.getElementById('ascii-custom-char').value = '';
+            setFillChar('█');
+            setTerminalTheme('cyber');
+            showToast("Zresetowano Generator ASCII", true);
+        }
+
+        function clearAsciiText() {
+            document.getElementById('ascii-text-input').value = '';
+            generateAscii();
+        }
+
+
+        // GLOBAL HELPERS & TABS
+        function copyTextToClipboard(text, successMsg) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast(successMsg, true))
+                    .catch(() => fallbackCopy(text, successMsg));
+            } else {
+                fallbackCopy(text, successMsg);
+            }
+        }
+
+        function fallbackCopy(text, successMsg) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(successMsg, true);
+            } catch (err) {
+                showToast("Błąd podczas kopiowania!", false);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function switchTab(viewName) {
+            document.getElementById('view-menu').classList.add('hidden');
+            document.getElementById('view-motd').classList.add('hidden');
+            document.getElementById('view-ascii').classList.add('hidden');
+
+            if (viewName === 'menu') {
+                document.getElementById('view-menu').classList.remove('hidden');
+            } else if (viewName === 'motd') {
+                document.getElementById('view-motd').classList.remove('hidden');
+                updateMotd();
+            } else if (viewName === 'ascii') {
+                document.getElementById('view-ascii').classList.remove('hidden');
+                generateAscii();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToast(msg, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.innerText = msg;
+            toastIcon.className = isSuccess 
+                ? "fa-solid fa-circle-check text-neonCyan text-lg" 
+                : "fa-solid fa-triangle-exclamation text-neonPink text-lg";
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Magic text animation interval
+        setInterval(() => {
+            const line1 = document.getElementById('motd-input-line1').value;
+            const line2 = document.getElementById('motd-input-line2').value;
+            if (line1.includes('&k') || line1.includes('§k') || line2.includes('&k') || line2.includes('§k')) {
+                updateMotd();
+            }
+        }, 120);
+
+        // INITIALIZATION
+        window.onload = function() {
+            setAnimationLevel(currentAnimLevel);
+            resizeCanvas();
+            animateParticles();
+
+            // MOTD Listeners
+            document.getElementById('motd-input-line1').addEventListener('input', updateMotd);
+            document.getElementById('motd-input-line2').addEventListener('input', updateMotd);
+            document.getElementById('motd-srv-name').addEventListener('input', updateMotd);
+            document.getElementById('motd-srv-players').addEventListener('input', updateMotd);
+
+            // ASCII Listeners
+            const textInput = document.getElementById('ascii-text-input');
+            const fontSelect = document.getElementById('ascii-font-style');
+            const borderSelect = document.getElementById('ascii-border-style');
+            const spacingSlider = document.getElementById('ascii-spacing-slider');
+            const scaleSlider = document.getElementById('ascii-scale-slider');
+            const upperToggle = document.getElementById('ascii-uppercase-toggle');
+            const customCharInput = document.getElementById('ascii-custom-char');
+
+            textInput.addEventListener('input', generateAscii);
+            fontSelect.addEventListener('change', generateAscii);
+            borderSelect.addEventListener('change', generateAscii);
+            upperToggle.addEventListener('change', generateAscii);
+            customCharInput.addEventListener('input', generateAscii);
+
+            spacingSlider.addEventListener('input', (e) => {
+                document.getElementById('ascii-spacing-val').innerText = e.target.value;
+                generateAscii();
+            });
+
+            scaleSlider.addEventListener('input', (e) => {
+                document.getElementById('ascii-scale-val').innerText = `${e.target.value}%`;
+                generateAscii();
+            });
+
+            updateMotd();
+            generateAscii();
+        };
+    </script>
+</body>
+</html>
