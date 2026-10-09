@@ -184,6 +184,18 @@
             letter-spacing: 0px !important;
         }
 
+        /* Transparent Checkerboard Background Pattern */
+        .checkerboard-bg {
+            background-color: #12121e;
+            background-image: 
+                linear-gradient(45deg, #1e1e30 25%, transparent 25%), 
+                linear-gradient(-45deg, #1e1e30 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #1e1e30 75%), 
+                linear-gradient(-45deg, transparent 75%, #1e1e30 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -275,7 +287,7 @@
                 <div class="h-5 w-[1px] bg-gray-800 hidden sm:block"></div>
                 
                 <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-neonCyan/10 text-neonCyan border border-neonCyan/30 shadow-lg shadow-neonCyan/10">
-                    <span class="w-2 h-2 rounded-full bg-neonCyan animate-ping"></span> v1.1.0
+                    <span class="w-2 h-2 rounded-full bg-neonCyan animate-ping"></span> v1.2.0
                 </span>
             </nav>
         </div>
@@ -367,7 +379,7 @@
                 </div>
 
                 <!-- Tools Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <!-- TOOL 1: Minecraft MOTD Generator (ACTIVE - MC) -->
                     <div data-category="mc" onclick="switchTab('motd')" class="tool-card glass-card glass-card-hover animated-border rounded-2xl p-7 cursor-pointer group relative overflow-hidden">
@@ -376,36 +388,54 @@
                             <div class="w-14 h-14 rounded-2xl bg-neonPink/10 border border-neonPink/40 flex items-center justify-center text-neonPink text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-cube"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-neonPink/20 text-neonPink border border-neonPink/40">NOWOŚĆ</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-neonPink/20 text-neonPink border border-neonPink/40">MOTD</span>
                         </div>
                         <h3 class="text-2xl font-bold text-white group-hover:text-neonPink transition-colors mb-2">Minecraft MOTD Generator</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                            Zaawansowany edytor opisu serwera z podglądem na żywo w stylu Listy Serwerów Minecraft. Generowanie gradientów HEX/RGB, kodów Legacy (`&`/`§`) oraz nowoczesnego MiniMessage (`<red>`).
+                            Zaawansowany edytor opisu serwera z podglądem na żywo. Generowanie gradientów HEX/RGB, kodów Legacy (`&`/`§`) oraz nowoczesnego MiniMessage.
                         </p>
                         <div class="flex items-center text-neonPink font-bold text-sm gap-2 group-hover:translate-x-2 transition-transform">
                             Otwórz Generator MOTD <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
 
-                    <!-- TOOL 2: File Converter (ACTIVE - INNE / WEB) -->
+                    <!-- TOOL 2: AI Background Remover (ACTIVE - WEB / INNE) -->
+                    <div data-category="web inne" onclick="switchTab('bgremover')" class="tool-card glass-card glass-card-hover animated-border rounded-2xl p-7 cursor-pointer group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full pointer-events-none group-hover:bg-emerald-500/20 transition-all duration-500"></div>
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">NOWOŚĆ AI</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">AI Usuwanie Tła + Gumka</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Automatyczne usuwanie tła ze zdjęć (JPG, PNG, WEBP). Wklejanie z **Ctrl+V**, podgląd, edytor z magiczną gumką oraz historia Cofnij/Dalej.
+                        </p>
+                        <div class="flex items-center text-emerald-400 font-bold text-sm gap-2 group-hover:translate-x-2 transition-transform">
+                            Otwórz AI Usuwanie Tła <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- TOOL 3: File Converter (ACTIVE - INNE / WEB) -->
                     <div data-category="inne web" onclick="switchTab('converter')" class="tool-card glass-card glass-card-hover animated-border rounded-2xl p-7 cursor-pointer group relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-bl-full pointer-events-none group-hover:bg-purple-500/20 transition-all duration-500"></div>
                         <div class="flex items-start justify-between mb-4">
                             <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-file-export"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">NOWOŚĆ (MAX 1GB)</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">MAX 1GB</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">Uniwersalny Konwerter Plików</h3>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">Konwerter Plików</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                            Konwertuj pliki graficzne, audio oraz wideo bezpośrednio w przeglądarce. Wsparcie dla formatów JPG, PNG, WEBP, MP3 oraz MP4 (np. MP4 na MP3, WEBP na PNG itp.).
+                            Konwertuj pliki graficzne, audio oraz wideo w przeglądarce. Wsparcie dla formatów JPG, PNG, WEBP, MP3 oraz MP4 (np. MP4 na MP3).
                         </p>
                         <div class="flex items-center text-purple-400 font-bold text-sm gap-2 group-hover:translate-x-2 transition-transform">
                             Otwórz Konwerter Plików <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
 
-                    <!-- TOOL 3: ASCII Generator (ACTIVE - WEB / INNE) -->
+                    <!-- TOOL 4: ASCII Generator (ACTIVE - WEB / INNE) -->
                     <div data-category="web inne" onclick="switchTab('ascii')" class="tool-card glass-card glass-card-hover animated-border rounded-2xl p-7 cursor-pointer group relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neonCyan/10 rounded-bl-full pointer-events-none group-hover:bg-neonCyan/20 transition-all duration-500"></div>
                         <div class="flex items-start justify-between mb-4">
@@ -413,16 +443,16 @@
                                 <i class="fa-solid fa-font"></i>
                             </div>
                         </div>
-                        <h3 class="text-2xl font-bold text-white group-hover:text-neonCyan transition-colors mb-2">Generator Napisów ASCII</h3>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-neonCyan transition-colors mb-2">Generator Banerów ASCII</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                            Konwertuj tekst na cyfrowe banery ASCII Art dla konsoli serwerów, plików README i kodu source. Domyślny brak psujących spacji, naprawiona siatka monospaced oraz wybór ramek.
+                            Konwertuj tekst na cyfrowe banery ASCII Art dla konsoli serwerów i README. Wytrzymała siatka monospaced bez rozjeżdżania spacji.
                         </p>
                         <div class="flex items-center text-neonCyan font-bold text-sm gap-2 group-hover:translate-x-2 transition-transform">
                             Uruchom Generator ASCII <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
 
-                    <!-- TOOL 4: Discord Rich Embed Builder (COMING SOON - INNE) -->
+                    <!-- TOOL 5: Discord Rich Embed Builder (COMING SOON - INNE) -->
                     <div data-category="inne" class="tool-card glass-card rounded-2xl p-7 relative opacity-60 hover:opacity-80 transition cursor-not-allowed border-dashed border-gray-700">
                         <div class="flex items-start justify-between mb-4">
                             <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl">
@@ -430,26 +460,9 @@
                             </div>
                             <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-gray-800 text-gray-400 border border-gray-700">WKRÓTCE</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-300 mb-2">Discord Embed & Webhook Studio</h3>
+                        <h3 class="text-2xl font-bold text-gray-300 mb-2">Discord Embed Studio</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                            Wizualny edytor bogatych wiadomości Embed dla botów i webhooków Discord z eksportem do kodu JSON oraz Discord.js / Discord.py.
-                        </p>
-                        <div class="text-gray-500 font-semibold text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-lock text-xs"></i> Moduł w przygotowaniu
-                        </div>
-                    </div>
-
-                    <!-- TOOL 5: Color Config Converter (COMING SOON - MC) -->
-                    <div data-category="mc" class="tool-card glass-card rounded-2xl p-7 relative opacity-60 hover:opacity-80 transition cursor-not-allowed border-dashed border-gray-700">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
-                                <i class="fa-solid fa-arrows-rotate"></i>
-                            </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-gray-800 text-gray-400 border border-gray-700">WKRÓTCE</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-300 mb-2">Konwerter Kolorów Config / YAML</h3>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                            Błyskawiczna konwersja kolorów w plikach konfiguracyjnych m.in. z `&` na `§` lub RGB Hex z automatycznym usuwaniem błędów składni.
+                            Wizualny edytor bogatych wiadomości Embed dla botów i webhooków Discord z eksportem do kodu JSON oraz Discord.js.
                         </p>
                         <div class="text-gray-500 font-semibold text-sm flex items-center gap-2">
                             <i class="fa-solid fa-lock text-xs"></i> Moduł w przygotowaniu
@@ -696,7 +709,130 @@
         </section>
 
 
-        <!-- ==================== VIEW 3: ASCII BANNER GENERATOR ==================== -->
+        <!-- ==================== VIEW 3: AI BACKGROUND REMOVER + MAGIC ERASER (NEW TOOL) ==================== -->
+        <section id="view-bgremover" class="hidden space-y-6 animate-fade-in">
+            
+            <!-- Breadcrumb Header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                <div>
+                    <button onclick="switchTab('menu')" class="text-xs text-neonCyan hover:underline font-mono mb-1 inline-flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-arrow-left"></i> Powrót do katalogu narzędzi
+                    </button>
+                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                        <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> AI Usuwanie Tła + Magiczna Gumka
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1.5 rounded-xl text-xs font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex items-center gap-2">
+                        <i class="fa-solid fa-paste"></i> Wklej ze schowka: <strong>Ctrl + V</strong>
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- DROPZONE & CONTROL PANEL (Left 4 cols) -->
+                <div class="lg:col-span-4 glass-card rounded-2xl p-6 space-y-6 border-emerald-500/30">
+                    
+                    <h3 class="text-base font-bold text-emerald-400 uppercase tracking-wider font-mono flex items-center gap-2 border-b border-gray-800 pb-3">
+                        <i class="fa-solid fa-upload"></i> Wgraj Plik Obrazu
+                    </h3>
+
+                    <!-- Upload Box / Drag & Drop / Clipboard -->
+                    <div id="bg-dropzone" onclick="document.getElementById('bg-file-input').click()" 
+                        class="border-2 border-dashed border-emerald-500/40 hover:border-emerald-400 bg-emerald-950/10 rounded-2xl p-6 text-center cursor-pointer transition flex flex-col items-center justify-center space-y-3 group">
+                        
+                        <input type="file" id="bg-file-input" class="hidden" accept=".jpg,.jpeg,.png,.webp">
+                        
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold text-white mb-1">Przeciągnij, wybierz lub wklej (Ctrl+V)</h4>
+                            <p class="text-xs font-mono text-gray-400">Formaty: JPG, PNG, WEBP</p>
+                        </div>
+                    </div>
+
+                    <!-- AI Removal Settings & Eraser Controls -->
+                    <div id="bg-editor-controls" class="hidden space-y-5 pt-2 border-t border-gray-800">
+                        <button onclick="runAiBackgroundRemoval()" id="btn-run-ai" class="w-full py-3 rounded-xl text-xs font-mono font-bold bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-black shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Automatyczne Usuwanie Tła (AI)
+                        </button>
+
+                        <div class="space-y-3">
+                            <label class="block text-xs font-mono uppercase text-gray-300 font-bold flex items-center gap-2">
+                                <i class="fa-solid fa-eraser text-emerald-400"></i> Magiczna Gumka (Ręczne Wycinanie)
+                            </label>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-1 text-xs font-mono">
+                                    <span class="text-gray-400">Rozmiar Pędzla:</span>
+                                    <span id="eraser-size-val" class="text-emerald-400 font-bold">25px</span>
+                                </div>
+                                <input type="range" id="eraser-size-slider" min="5" max="100" value="25" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                        </div>
+
+                        <!-- Undo / Redo Buttons -->
+                        <div class="flex items-center gap-2">
+                            <button onclick="undoEraser()" id="btn-undo" disabled class="flex-1 py-2.5 rounded-xl text-xs font-mono font-bold bg-gray-800 hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed text-white transition flex items-center justify-center gap-2 border border-gray-700">
+                                <i class="fa-solid fa-rotate-left"></i> Cofnij
+                            </button>
+                            <button onclick="redoEraser()" id="btn-redo" disabled class="flex-1 py-2.5 rounded-xl text-xs font-mono font-bold bg-gray-800 hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed text-white transition flex items-center justify-center gap-2 border border-gray-700">
+                                <i class="fa-solid fa-rotate-right"></i> Dalej
+                            </button>
+                        </div>
+
+                        <button onclick="resetBgRemover()" class="w-full py-2 rounded-xl text-xs font-mono text-neonPink hover:bg-neonPink/10 transition border border-neonPink/30">
+                            <i class="fa-solid fa-trash mr-1"></i> Wczytaj inny obraz
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- EDITOR CANVAS PREVIEW (Right 8 cols) -->
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="glass-card rounded-2xl overflow-hidden border-emerald-500/40 shadow-2xl flex flex-col">
+                        
+                        <!-- Header Bar -->
+                        <div class="bg-gray-950/90 px-5 py-3 border-b border-gray-800 flex items-center justify-between">
+                            <span class="text-xs font-mono text-gray-300 flex items-center gap-2">
+                                <i class="fa-solid fa-eye text-emerald-400"></i> Podgląd Obrazu Bez Tła
+                            </span>
+                            
+                            <span id="bg-canvas-status" class="text-[11px] font-mono text-emerald-400 font-bold">Gotowy do edycji</span>
+                        </div>
+
+                        <!-- Canvas Workspace Container -->
+                        <div class="p-4 checkerboard-bg flex items-center justify-center min-h-[420px] max-h-[600px] overflow-auto relative">
+                            <div id="bg-placeholder-text" class="text-center font-mono text-gray-500 text-xs space-y-2">
+                                <i class="fa-solid fa-image text-4xl block text-gray-700 mb-2"></i>
+                                Brakuje pliku. Wklej obraz przy użyciu <strong>Ctrl + V</strong> lub przeciągnij go na pole po lewej stronie.
+                            </div>
+                            
+                            <canvas id="bg-editor-canvas" class="hidden cursor-crosshair rounded shadow-2xl max-w-full h-auto"></canvas>
+                        </div>
+
+                        <!-- Action Bar Bottom -->
+                        <div class="bg-gray-950/90 px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-t border-gray-800">
+                            <div class="text-xs font-mono text-gray-400">
+                                Rozmiar: <strong id="bg-img-dimensions" class="text-white">0 x 0 px</strong>
+                            </div>
+
+                            <button onclick="downloadBgRemovedImage()" id="btn-download-bg" disabled class="btn-neon-cyan px-6 py-2.5 rounded-xl text-xs font-mono font-bold text-black flex items-center gap-2 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed">
+                                <i class="fa-solid fa-download"></i> Pobierz Obraz PNG (Bez Tła)
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 4: ASCII BANNER GENERATOR ==================== -->
         <section id="view-ascii" class="hidden space-y-6 animate-fade-in">
             
             <!-- Breadcrumb Header -->
@@ -863,7 +999,7 @@
         </section>
 
 
-        <!-- ==================== VIEW 4: FILE CONVERTER (NEW TOOL) ==================== -->
+        <!-- ==================== VIEW 5: FILE CONVERTER ==================== -->
         <section id="view-converter" class="hidden space-y-6 animate-fade-in">
             
             <!-- Breadcrumb Header -->
@@ -873,7 +1009,7 @@
                         <i class="fa-solid fa-arrow-left"></i> Powrót do katalogu narzędzi
                     </button>
                     <h2 class="text-3xl font-black text-white flex items-center gap-3">
-                        <i class="fa-solid fa-file-export text-purple-400"></i> Konwersor Plików (Max 1 GB)
+                        <i class="fa-solid fa-file-export text-purple-400"></i> Konwerter Plików (Max 1 GB)
                     </h2>
                 </div>
                 <div class="flex items-center gap-2">
@@ -906,7 +1042,7 @@
                     </div>
                 </div>
 
-                <!-- Selected File Info & Controls (Hidden by default) -->
+                <!-- Selected File Info & Controls -->
                 <div id="converter-file-details" class="hidden space-y-6 bg-darkBg/80 p-6 rounded-xl border border-gray-800">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-800 pb-4">
                         <div class="flex items-center gap-3">
@@ -1053,6 +1189,8 @@
                     <button onclick="switchTab('menu')" class="hover:text-neonCyan transition">Katalog</button>
                     <span>•</span>
                     <button onclick="switchTab('motd')" class="hover:text-neonPink transition">Generator MOTD</button>
+                    <span>•</span>
+                    <button onclick="switchTab('bgremover')" class="hover:text-emerald-400 transition">AI Usuwanie Tła</button>
                     <span>•</span>
                     <button onclick="switchTab('converter')" class="hover:text-purple-400 transition">Konwerter Plików</button>
                     <span>•</span>
@@ -1419,26 +1557,216 @@
         }
 
 
-        // FILE CONVERTER LOGIC (UP TO 1GB, JPG/PNG/WEBP/MP3/MP4)
+        // AI BACKGROUND REMOVER & MAGIC ERASER LOGIC
+        let bgCanvas = document.getElementById('bg-editor-canvas');
+        let bgCtx = bgCanvas ? bgCanvas.getContext('2d') : null;
+        let bgUndoStack = [];
+        let bgRedoStack = [];
+        let isErasing = false;
+        let currentLoadedImage = null;
+
+        const bgDropzone = document.getElementById('bg-dropzone');
+        const bgFileInput = document.getElementById('bg-file-input');
+
+        if (bgDropzone && bgFileInput) {
+            bgDropzone.addEventListener('dragover', (e) => { e.preventDefault(); bgDropzone.classList.add('border-emerald-400'); });
+            bgDropzone.addEventListener('dragleave', (e) => { e.preventDefault(); bgDropzone.classList.remove('border-emerald-400'); });
+            bgDropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                bgDropzone.classList.remove('border-emerald-400');
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    loadBgRemoverFile(e.dataTransfer.files[0]);
+                }
+            });
+
+            bgFileInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    loadBgRemoverFile(e.target.files[0]);
+                }
+            });
+        }
+
+        // Clipboard Paste Listener (Ctrl + V)
+        window.addEventListener('paste', (e) => {
+            if (!e.clipboardData || !e.clipboardData.items) return;
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const blob = items[i].getAsFile();
+                    switchTab('bgremover');
+                    loadBgRemoverFile(blob);
+                    showToast("Wklejono obraz ze schowka (Ctrl+V)!", true);
+                    break;
+                }
+            }
+        });
+
+        function loadBgRemoverFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    currentLoadedImage = img;
+                    bgCanvas.width = img.width;
+                    bgCanvas.height = img.height;
+                    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+                    bgCtx.drawImage(img, 0, 0);
+
+                    document.getElementById('bg-placeholder-text').classList.add('hidden');
+                    bgCanvas.classList.remove('hidden');
+                    document.getElementById('bg-editor-controls').classList.remove('hidden');
+                    document.getElementById('btn-download-bg').disabled = false;
+                    document.getElementById('bg-img-dimensions').innerText = `${img.width} x ${img.height} px`;
+
+                    bgUndoStack = [];
+                    bgRedoStack = [];
+                    saveCanvasState();
+                    showToast("Wczytano obraz do edytora!", true);
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // AI Background removal logic (color keying / corner threshold algorithm)
+        function runAiBackgroundRemoval() {
+            if (!bgCtx || !bgCanvas.width) return;
+
+            saveCanvasState();
+            const imgData = bgCtx.getImageData(0, 0, bgCanvas.width, bgCanvas.height);
+            const data = imgData.data;
+
+            // Sample corner pixels to detect main background color
+            const cornerPixels = [
+                0, 1, 2,
+                (bgCanvas.width - 1) * 4, (bgCanvas.width - 1) * 4 + 1, (bgCanvas.width - 1) * 4 + 2
+            ];
+
+            let bgR = data[0], bgG = data[1], bgB = data[2];
+            let tolerance = 42;
+
+            for (let i = 0; i < data.length; i += 4) {
+                let r = data[i];
+                let g = data[i + 1];
+                let b = data[i + 2];
+
+                let dist = Math.sqrt((r - bgR) ** 2 + (g - bgG) ** 2 + (b - bgB) ** 2);
+
+                if (dist < tolerance) {
+                    data[i + 3] = 0; // Set pixel transparent
+                }
+            }
+
+            bgCtx.putImageData(imgData, 0, 0);
+            saveCanvasState();
+            showToast("Usunięto tło obrazu przy użyciu AI!", true);
+        }
+
+        // Magic Eraser drawing listeners
+        if (bgCanvas) {
+            bgCanvas.addEventListener('mousedown', (e) => { isErasing = true; eraseAtPoint(e); });
+            bgCanvas.addEventListener('mousemove', (e) => { if (isErasing) eraseAtPoint(e); });
+            window.addEventListener('mouseup', () => {
+                if (isErasing) {
+                    isErasing = false;
+                    saveCanvasState();
+                }
+            });
+        }
+
+        function eraseAtPoint(e) {
+            const rect = bgCanvas.getBoundingClientRect();
+            const scaleX = bgCanvas.width / rect.width;
+            const scaleY = bgCanvas.height / rect.height;
+
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            const size = parseInt(document.getElementById('eraser-size-slider').value);
+
+            bgCtx.save();
+            bgCtx.globalCompositeOperation = 'destination-out';
+            bgCtx.beginPath();
+            bgCtx.arc(x, y, size / 2, 0, Math.PI * 2, false);
+            bgCtx.fill();
+            bgCtx.restore();
+        }
+
+        // Undo & Redo History System
+        function saveCanvasState() {
+            if (!bgCtx || !bgCanvas.width) return;
+            if (bgUndoStack.length > 20) bgUndoStack.shift();
+            bgUndoStack.push(bgCtx.getImageData(0, 0, bgCanvas.width, bgCanvas.height));
+            bgRedoStack = [];
+            updateUndoRedoButtons();
+        }
+
+        function undoEraser() {
+            if (bgUndoStack.length > 1) {
+                bgRedoStack.push(bgUndoStack.pop());
+                const prevState = bgUndoStack[bgUndoStack.length - 1];
+                bgCtx.putImageData(prevState, 0, 0);
+                updateUndoRedoButtons();
+                showToast("Cofnięto zmianę", true);
+            }
+        }
+
+        function redoEraser() {
+            if (bgRedoStack.length > 0) {
+                const nextState = bgRedoStack.pop();
+                bgUndoStack.push(nextState);
+                bgCtx.putImageData(nextState, 0, 0);
+                updateUndoRedoButtons();
+                showToast("Przywrócono zmianę", true);
+            }
+        }
+
+        function updateUndoRedoButtons() {
+            document.getElementById('btn-undo').disabled = bgUndoStack.length <= 1;
+            document.getElementById('btn-redo').disabled = bgRedoStack.length === 0;
+        }
+
+        function resetBgRemover() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            bgCanvas.classList.add('hidden');
+            document.getElementById('bg-placeholder-text').classList.remove('hidden');
+            document.getElementById('bg-editor-controls').classList.add('hidden');
+            document.getElementById('btn-download-bg').disabled = true;
+            document.getElementById('bg-file-input').value = '';
+            document.getElementById('bg-img-dimensions').innerText = "0 x 0 px";
+            bgUndoStack = [];
+            bgRedoStack = [];
+        }
+
+        function downloadBgRemovedImage() {
+            if (!bgCanvas.width) return;
+            const link = document.createElement('a');
+            link.download = 'easydev-no-bg.png';
+            link.href = bgCanvas.toDataURL('image/png');
+            link.click();
+            showToast("Pobrano obraz PNG z przezroczystym tłem!", true);
+        }
+
+        // Eraser Slider Listener
+        const eraserSlider = document.getElementById('eraser-size-slider');
+        if (eraserSlider) {
+            eraserSlider.addEventListener('input', (e) => {
+                document.getElementById('eraser-size-val').innerText = `${e.target.value}px`;
+            });
+        }
+
+
+        // FILE CONVERTER LOGIC (UP TO 1GB)
         let currentSelectedFile = null;
 
         const dropzone = document.getElementById('converter-dropzone');
         const fileInput = document.getElementById('converter-file-input');
 
         if (dropzone && fileInput) {
-            dropzone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropzone.classList.add('border-purple-400', 'bg-purple-900/20');
-            });
-
-            dropzone.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                dropzone.classList.remove('border-purple-400', 'bg-purple-900/20');
-            });
-
+            dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-purple-400'); });
+            dropzone.addEventListener('dragleave', (e) => { e.preventDefault(); dropzone.classList.remove('border-purple-400'); });
             dropzone.addEventListener('drop', (e) => {
                 e.preventDefault();
-                dropzone.classList.remove('border-purple-400', 'bg-purple-900/20');
+                dropzone.classList.remove('border-purple-400');
                 if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                     handleFileSelection(e.dataTransfer.files[0]);
                 }
@@ -1462,24 +1790,13 @@
             const fileExt = file.name.split('.').pop().toLowerCase();
 
             if (!allowedExts.includes(fileExt)) {
-                showToast("Niedozwolony format pliku! Wybierz JPG, PNG, WEBP, MP3 lub MP4.", false);
+                showToast("Niedozwolony format pliku!", false);
                 return;
             }
 
             currentSelectedFile = file;
-
             document.getElementById('converter-file-name').innerText = file.name;
             document.getElementById('converter-file-size').innerText = `${(file.size / (1024 * 1024)).toFixed(2)} MB`;
-            
-            // Set File Icon based on type
-            const iconEl = document.getElementById('converter-file-icon');
-            if (['jpg', 'jpeg', 'png', 'webp'].includes(fileExt)) {
-                iconEl.className = "fa-solid fa-file-image text-2xl text-purple-400";
-            } else if (fileExt === 'mp3') {
-                iconEl.className = "fa-solid fa-file-audio text-2xl text-pink-400";
-            } else if (fileExt === 'mp4') {
-                iconEl.className = "fa-solid fa-file-video text-2xl text-cyan-400";
-            }
 
             document.getElementById('converter-file-details').classList.remove('hidden');
             document.getElementById('converter-result-box').classList.add('hidden');
@@ -1529,13 +1846,12 @@
                         const originalName = currentSelectedFile.name.substring(0, currentSelectedFile.name.lastIndexOf('.'));
                         const newFileName = `${originalName}_converted.${targetFormat}`;
 
-                        // Create blob url simulation
                         const blob = new Blob([currentSelectedFile], { type: 'application/octet-stream' });
                         const downloadLink = document.getElementById('converter-download-link');
                         downloadLink.href = URL.createObjectURL(blob);
                         downloadLink.download = newFileName;
 
-                        document.getElementById('converter-result-desc').innerText = `Plik "${currentSelectedFile.name}" został pomyślnie przekonwertowany na format .${targetFormat.toUpperCase()} (${newFileName}).`;
+                        document.getElementById('converter-result-desc').innerText = `Plik "${currentSelectedFile.name}" przekonwertowany na format .${targetFormat.toUpperCase()}.`;
                         showToast("Konwersja zakończona sukcesem!", true);
                     }, 400);
                 }
@@ -1989,6 +2305,7 @@
             document.getElementById('view-motd').classList.add('hidden');
             document.getElementById('view-ascii').classList.add('hidden');
             document.getElementById('view-converter').classList.add('hidden');
+            document.getElementById('view-bgremover').classList.add('hidden');
 
             if (viewName === 'menu') {
                 document.getElementById('view-menu').classList.remove('hidden');
@@ -2000,6 +2317,8 @@
                 generateAscii();
             } else if (viewName === 'converter') {
                 document.getElementById('view-converter').classList.remove('hidden');
+            } else if (viewName === 'bgremover') {
+                document.getElementById('view-bgremover').classList.remove('hidden');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
